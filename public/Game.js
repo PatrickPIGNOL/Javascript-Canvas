@@ -1,4 +1,5 @@
 let Mouse = null;
+let Down = false;
 let Clicked = false;
 class Game
 {
@@ -8,26 +9,19 @@ class Game
         this.aBrowser = pBrowser;
         this.aCanvas = pCanvas;
         this.aClicked = false;
+        this.aDown = false;
         this.aMouse = null;
+        this.aSquareColor = null;
         this.aCanvas.addEventListener
         (
-            "click",
-            pClickEvent =>
-            {
-                this.mOnClick(pClickEvent);
-            }
-        );
-        this.aCanvas.addEventListener
-        (
-            'dblclick',
-            pDoubleClickEvent => 
-            {
-                this.mOnDoubleClick(pDoubleClickEvent);
+            "mousemove",
+            pMouseMoveEvent =>
+            {                
+                this.mOnMouseMove(pMouseMoveEvent);
             }
         );
         this.aCanvas.onmouseenter = this.mOnMouseEnter;
         this.aCanvas.onmouseleave = this.mOnMouseLeave;
-        this.aCanvas.onmousemove = this.mOnMouseMove;
         this.aCanvas.onmouseover = this.mOnMouseOver;
         this.aCanvas.onmousedown = this.mOnMouseDown;
         this.aCanvas.addEventListener
@@ -38,7 +32,30 @@ class Game
                 this.mOnMouseDown(pMouseDownEvent)
             }
         );
-        this.aCanvas.onmouseup = this.mOnMouseUp;
+        this.aCanvas.addEventListener
+        (
+            "mouseup",
+            pMouseUpEvent =>
+            {
+                this.mOnMouseUp(pMouseUpEvent)
+            }
+        );
+        this.aCanvas.addEventListener
+        (
+            "click",
+            pClickEvent =>
+            {
+                this.mOnClick(pClickEvent);
+            }
+        );
+        this.aCanvas.addEventListener
+        (
+            "dblclick",
+            pDoubleClickEvent => 
+            {
+                this.mOnDoubleClick(pDoubleClickEvent);
+            }
+        );
         this.aCanvas.style.margin = 0;
         this.aCanvas.style.padding = 0;       
         this.aContext = this.aCanvas.getContext('2d');
@@ -81,6 +98,21 @@ class Game
         }
         this.aMouse = Mouse;
         this.aClicked = Clicked;
+        this.aDown = Down;
+
+        if(this.aDown)
+        {
+            this.aSquareColor = 'rgba(255, 0, 0, 0.5)';
+        }
+        else if(this.aClicked)
+        {
+            this.aSquareColor = 'rgba(0, 255, 0, 0.5)';
+        }
+        else
+        {
+            this.aSquareColor = 'rgba(0, 0, 255, 0.5)';
+        }
+
         console.log("ENDUPDATE !!!");
     }
     
@@ -98,14 +130,7 @@ class Game
             pGraphicContext.fillStyle = 'rgba(0, 0, 200, 0.4)';
             pGraphicContext.fillRect(this.aMouse.clientX - 60, this.aMouse.clientY - 60, this.aCanvas.width +50- this.aMouse.clientX, this.aCanvas.height +50- this.aMouse.clientY);
 
-            if(this.aClicked)
-            {
-                pGraphicContext.fillStyle = 'rgba(0, 255, 0, 0.6)';
-            }
-            else
-            {
-                pGraphicContext.fillStyle = 'rgba(0, 0, 255, 0.6)';
-            }
+            pGraphicContext.fillStyle = this.aSquareColor;
             
             pGraphicContext.fillRect(this.aMouse.clientX - 50, this.aMouse.clientY - 50, 100, 100);
         }
@@ -170,12 +195,14 @@ class Game
     mOnMouseDown(pMouseDownEvent)
     {
         console.log("MOUSEDOWN !!!");
+        Down = true;
         console.log("ENDMOUSEDOWN !!!");
     }
 
     mOnMouseUp()
     {
         console.log("MOUSEUP !!!");
+        Down = false;
         console.log("ENDMOUSEUP !!!");
     }
 
