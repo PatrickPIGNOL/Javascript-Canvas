@@ -27,7 +27,6 @@ function mHTMLHeader(pTitle)
     "<title>"+ 
         pTitle +
     "</title>" +
-    "<link rel='stylesheet' href='css.css'>" +
     "</head>" +
     "<body>"+
     "<canvas id='canvas'></canvas>"+

@@ -2,7 +2,6 @@ class Scene
 {
     constructor()
     {
-
+        
     }
-    
 }

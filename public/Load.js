@@ -1,14 +1,13 @@
-function mLoadJavascriptFile(pFile, pCallback)
+function mLoadJavascriptFile(pJavaScriptFile, pCallback)
 {
-    const js = document.createElement("script");
-    js.type = "text/javascript";
-    js.src = pFile;
+    const vJavaScriptFile = document.createElement("script");
+    vJavaScriptFile.type = "text/javascript";
+    vJavaScriptFile.src = pJavaScriptFile;
     if(pCallback)
     {
-        js.onreadystatechange = pCallback;
-        js.onload = pCallback;
+        vJavaScriptFile.onload = pCallback;
     }
-    document.body.appendChild(js);//js);
+    document.body.appendChild(vJavaScriptFile);
 }
 
 const Browsers = 
@@ -39,7 +38,7 @@ function mBrowser()
     {
         vBrowser += Browsers.Safari;
     }
-    if(/*@cc_on!@*/false || !!document.documentMode)
+    if(false || !!document.documentMode)
     {
         vBrowser += Browsers.IE;
     }
@@ -62,14 +61,12 @@ function mBrowser()
     return vBrowser;
 }
 
-let vMyGame;
 let vBrowser = mBrowser();
 
 window.onload = OnWindowLoad;
 
 function OnWindowLoad()
 {
-    mLoadJavascriptFile("Game.js", mUseLoadedFiles);
     const vHTML = document.getElementById("html");
     vHTML.style.margin = 0;
     vHTML.style.padding = 0;  
@@ -77,28 +74,62 @@ function OnWindowLoad()
     document.body.style.margin = 0;
     document.body.style.padding = 0;
     document.body.style.overflow = 'hidden';
+    
+    mLoadJavascriptFile
+    (
+        "./Dimensions.js",
+        ()=>
+        {
+            mLoadJavascriptFile
+            (
+                "./GraphicComponent.js",
+                ()=>
+                {
+                    mLoadJavascriptFile
+                    (
+                        "./Window.js",
+                        ()=>
+                        {
+                            mLoadJavascriptFile
+                            (
+                                "./GameEngine.js", 
+                                ()=>
+                                {
+                                    mLoadJavascriptFile
+                                    (
+                                        "./Scene.js", 
+                                        ()=>
+                                        {
+                                            mLoadJavascriptFile
+                                            (
+                                                "./IntroScene.js", 
+                                                ()=>
+                                                {
+                                                    mLoadJavascriptFile
+                                                    (
+                                                        "./MenuScene.js", 
+                                                        ()=>
+                                                        {
+                                                            const vFPS = 30;
+                                                            const vCanvas = document.getElementById("canvas");
+
+                        
+                                                            vCanvas.style.margin = 0;
+                                                            vCanvas.style.padding = 0;
+                                                            GameEngine.Instance.mStart(vBrowser, vCanvas, IntroScene.Instance);
+                                                            GameEngine.Instance.Canvas.style.cursor = "none";
+                                                        }
+                                                    );
+                                                }
+                                            );            
+                                        }
+                                    );
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+        }
+    )
 }
-
-function mUseLoadedFiles()
-{
-    const vCanvas = document.getElementById("canvas");
-    vCanvas.style.margin = 0;
-    vCanvas.style.padding = 0;
-    vMyGame = new Game(vBrowser, vCanvas);
-    vMyGame.mStart();
-    vMyGame.LoopTimeOut = window.setInterval(mGameLoop, 32);
-    window.onresize = mGameResize;
-}
-
-function mGameLoop()
-{
-    vMyGame.mLoop()
-}
-
-function mGameResize()
-{
-    vMyGame.mOnResize();
-}
-
-
-
