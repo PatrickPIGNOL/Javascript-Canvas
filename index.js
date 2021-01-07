@@ -9,7 +9,8 @@ const listener = app.listen(process.env.PORT, () =>
 
 app.get
 (
-    "/", (request, response) => 
+    "/", 
+    (request, response) =>
     {
         let vHTML = mHTMLHeader("Canvas");
         vHTML = vHTML + mHTMLFooter();
@@ -30,7 +31,7 @@ function mHTMLHeader(pTitle)
     "</head>" +
     "<body>"+
     "<canvas id='canvas'></canvas>"+
-    "<script src='./Load.js'></script>";
+    "<script type='module' src='./Loader.mjs'></script>";
     return vHTML;
 }
 
