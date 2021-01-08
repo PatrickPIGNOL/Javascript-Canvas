@@ -26,28 +26,52 @@ const WindowState = Object.freeze
 
 class MainMenuWindow extends WindowBase
 {
-    constructor()
+    constructor(pParent, pX, pY, pWidth, pHeight)
     {
-        super(null, 0, 0, 200, 400);
+        super(pParent, pX, pY, pWidth, pHeight);
         this.aMaxWidth = this.Width;
         this.aMaxHeight = this.Height;
         this.aLanguagesButton = new MainMenuButton(this, 10, 80, 180, 40,   " Languages");
+        this.aLanguagesButton.mOnClickEventHandler = function (pEvent)
+            {
+                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
+                {
+                    this.TextColor = "rgba(0, 255, 0, 1.0)";
+                }
+                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
+                {
+                    this.TextColor = "rgba(231, 212, 184, 1.0)";
+                }
+            };
         this.aNewGameButton = new MainMenuButton(this, 10, 130, 180, 40,    " New Game ");
+        this.aNewGameButton.mOnClickEventHandler = function (pEvent)
+            {
+                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
+                {
+                    this.TextColor = "rgba(0, 255, 0, 1.0)";
+                }
+                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
+                {
+                    this.TextColor = "rgba(231, 212, 184, 1.0)";
+                }
+            };
         this.aLoadButton = new MainMenuButton(this, 10, 180, 180, 40,       "      Load ");
+        this.aLoadButton.mOnClickEventHandler = function (pEvent)
+            {
+                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
+                {
+                    this.TextColor = "rgba(0, 255, 0, 1.0)";
+                }
+                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
+                {
+                    this.TextColor = "rgba(231, 212, 184, 1.0)";
+                }
+            };
         this.aOptionsButton = new MainMenuButton(this, 10, 230, 180, 40,       "   Options ");
         this.aCreditsButton = new MainMenuButton(this, 10, 280, 180, 40,       "   Crédits ");
-
         this.aTimer = 0;
         this.Visible = false;
-        this.aState
-        
-        /*
-            Langues
-            Nouveau Jeu
-            Charger une partie
-            Options
-            Crédits
-        */
+        this.aState = WindowState.Closed
     }
 
 
@@ -249,6 +273,12 @@ class MainMenuWindow extends WindowBase
             pGraphicContext.globalAlpha = 1;
         }
     }
+    /*
+    mOnMouseMoveEventHandler(pEvent)
+    {
+        super.mOnMouseMoveEventHandler(pEvent);
+    }
+    */
 }
 
 export {MainMenuWindow};

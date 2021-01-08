@@ -22,7 +22,7 @@ class MainMenuButton extends Button
         this.Visible = false;
         this.aState = EMainMenuBoutonStatus.FadeIn;
         this.aTimer = 0;
-        this.GlobalAlpha = 0;
+        this.GlobalAlpha = 0;        
     }
 
     mShow()
@@ -90,6 +90,12 @@ class MainMenuButton extends Button
             }break;
         }
     }
+    /*
+    mOnMouseMoveEventHandler(pEvent)
+    {
+        super.mOnMouseMoveEventHandler(pEvent);
+    }
+    */
 }
 
 export {MainMenuButton};

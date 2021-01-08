@@ -53,6 +53,7 @@ class IntroScene extends Scene
     
     mOnUpdateEventHandler(pCanvas, pDeltaTime)
     {
+        super.mOnUpdateEventHandler(pCanvas, pDeltaTime)
         this.aTimer += pDeltaTime;
         switch(this.aStatus)
         {
@@ -116,9 +117,11 @@ class IntroScene extends Scene
         this.aClicked = true;
     }
     
-    mOnMouseMoveEventHandler(pMouseMoveEvent)
+    mOnMouseMoveEventHandler(pEvent)
     {
-        this.aMouse = pMouseMoveEvent;
+        super.mOnMouseMoveEventHandler(pEvent);
+        console.log("IntroScene mOnMouseMoveEventHandler")
+        this.aMouse = pEvent;
     }
 }
 export {IntroStatus};

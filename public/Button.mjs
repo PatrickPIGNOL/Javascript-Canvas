@@ -1,6 +1,7 @@
 import {GraphicComponent} from "./GraphicComponent.mjs";
 import {Loader, EImage, EFonts} from "./Loader.mjs";
-import {SizeableComponent} from "./SizeableComponent.mjs";
+import {MouseFocusable} from "./MouseFocusable.mjs";
+
 /*
 const EButtonStates = Object.freeze
 (
@@ -10,15 +11,15 @@ const EButtonStates = Object.freeze
 )
 */
 
-class Button extends SizeableComponent
+class Button extends MouseFocusable
 {
     constructor(pParent, pX, pY, pWidth, pHeight, pText)
     {
         super(pParent, pX, pY, pWidth, pHeight);
         if(this.Parent)
         {
-            this.Parent.mAddOnAllEventListener(this);
-            this.Parent.mAddComponent(this);
+            this.Parent.mAddOnUpdateEventListener(this);
+            this.Parent.mAddOnDrawEventListener(this);
         }
         this.MouseFocusable = true;
         this.Visible = true;
@@ -27,7 +28,6 @@ class Button extends SizeableComponent
         this.aTextSize = "14px";
         this.aFont = "sherif";
         this.aTextColor = "rgba(0, 0, 0, 1.0)";
-        this.aClicked = false;
     }
 
     get Font()
@@ -135,20 +135,11 @@ class Button extends SizeableComponent
             pGraphicContext.globalAlpha = 1;
         }
     }
-
-    mOnClickEventHandler(pClickEvent)
+    
+    mOnMouseMoveEventHandler(pEvent)
     {
-        this.aClicked = true;
-    }
-
-    mOnMouseMoveEventHandler(pMouseMoveEvent)
-    {
-        this.aMouse = pMouseMoveEvent;
-        this.MouseFocus = this.mUpdateMouseFocus(pMouseMoveEvent);
-        if(this.MouseFocus && this.MouseFocus !== this)
-        {
-            this.MouseFocus.mOnMouseMove(pMouseMoveEvent)
-        }
+        super.mOnMouseMoveEventHandler(pEvent);
+        console.log("Button mOnMouseMoveEventHandler");
     }
 }
 

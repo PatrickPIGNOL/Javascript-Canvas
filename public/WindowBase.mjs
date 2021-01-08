@@ -1,4 +1,4 @@
-import {SizeableComponent} from "./SizeableComponent.mjs";
+import {MouseFocusable} from "./MouseFocusable.mjs";
 import {Loader, EImage} from "./Loader.mjs";
 
 const WindowState = Object.freeze
@@ -6,7 +6,7 @@ const WindowState = Object.freeze
     {
         Opening: 
         {            
-            FadeIn: 0
+            FadeIn: 0,
         },
         Opened: 1,
         Closing: 
@@ -17,7 +17,7 @@ const WindowState = Object.freeze
     }
 );
 
-class WindowBase extends SizeableComponent
+class WindowBase extends MouseFocusable
 {
     constructor(pParent, pX, pY, pWidth, pHeight)
     {
@@ -26,6 +26,12 @@ class WindowBase extends SizeableComponent
         this.aState = WindowState.Opening.FadeIn;
         this.aTimer = 0;
         this.aBackGroundStyle = "rgba(80,127,255,1.0)"; 
+        this.aText = "WindowBase";
+    }
+
+    get Text()
+    {
+        return this.aText;
     }
 
     get BackGroundStyle()
@@ -63,7 +69,6 @@ class WindowBase extends SizeableComponent
     mOnUpdateEventHandler(pCanvas, pDeltaTime)
     {
         this.aTimer += pDeltaTime;
-        console.log("GameWindow mOnUpdateEventHandler")
         switch(this.aState)
         {
             case WindowState.Opened.FadeIn:
@@ -114,20 +119,21 @@ class WindowBase extends SizeableComponent
 
     mOnClickEventHandler(pClickEvent)
     {
+        super.mOnClickEventHandler(pClickEvent);
+        if(this.MouseFocus && this.MouseFocus.Text)
+        {
+            console.log(this.MouseFocus.Text);
+        }
         if(this.MouseFocus && this.MouseFocus !== this)
         {
             this.MouseFocus.mOnClickEvent(pClickEvent);
         }
     }
 
-    mOnMouseMoveEventHandler(pMouseMoveEvent)
+    mOnMouseMoveEventHandler(pOnMouseMoveEvent)
     {
-        this.MouseFocus = this.mUpdateMouseFocus(pMouseMoveEvent);
-        if(this.MouseFocus && this.MouseFocus !== this)
-        {            
-            this.MouseFocus.mOnMouseMoveEvent(pMouseMoveEvent);
-        }
-        this.aMouse = pMouseMoveEvent;
+        super.mOnMouseMoveEventHandler(pOnMouseMoveEvent)
+        console.log("WindowBase mOnMouseMoveEventHandler")
     }
 }
 

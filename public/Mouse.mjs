@@ -26,10 +26,10 @@ class Mouse extends GraphicComponent
             pGraphicContext.drawImage(Loader.Images[EImage.Mouse.Index], this.aMouse.clientX, this.aMouse.clientY);
         }
     }
-
-    mOnMouseMoveEventHandler(pMouseMoveEvent)
+    
+    mOnMouseMoveEventHandler(pEvent)
     {
-        this.aMouse = pMouseMoveEvent;
+        this.aMouse = pEvent;
     }
 }
 export {Mouse};

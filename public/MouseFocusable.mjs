@@ -1,18 +1,21 @@
 import {GraphicComponent} from "./GraphicComponent.mjs";
 
-class SizeableComponent extends GraphicComponent
+class MouseFocusable extends GraphicComponent
 {
     constructor(pParent, pX, pY, pWidth, pHeight)
     {
         super();
+        this.aComponents = new Array();
         this.aParent = pParent;
+        if(this.aParent)
+        {
+            this.aParent.mAddComponent(this);
+        }
         this.aX = pX;
         this.aY = pY;
         this.aWidth = pWidth;
         this.aHeight = pHeight;
         this.aMouseFocusable = false;     
-        this.aMouseFocus = null;
-        this.aComponents = new Array();
     }
 
     get Components()
@@ -99,11 +102,6 @@ class SizeableComponent extends GraphicComponent
     {
         return this.aMouseFocus;
     }
-
-    set MouseFocus(pMouseFocus)
-    {
-        this.aMouseFocus = pMouseFocus;
-    }
     
     get MouseFocusable()
     {
@@ -115,29 +113,49 @@ class SizeableComponent extends GraphicComponent
         this.aMouseFocusable = pMouseFocusable;
     }
 
+    mOnClickEventHandler(pEvent)
+    {
+        super.mOnClickEventHandler(pEvent);
+        if(this.MouseFocus && (this.MouseFocus !== this))
+        {
+            this.aMouseFocus.mOnClickEvent(pEvent);
+        }
+    }
+
+    mOnMouseMoveEventHandler(pEvent)
+    {
+        super.mOnMouseMoveEventHandler(pEvent);
+        this.aMouseFocus = this.mUpdateMouseFocus(pEvent);
+        if(this.MouseFocus && (this.MouseFocus !== this))
+        {
+            this.MouseFocus.mOnMouseMoveEvent(pEvent);
+        }
+    }
+
     mUpdateMouseFocus(pMouse)
     {
         this.aMouseFocus = null;
-        this.aMouse = pMouse;
         if
         (
-            (this.aMouse.clientX >= this.AbsoluteX) 
-            && 
-            (this.aMouse.clientX <= this.AbsoluteX + this.Width)
+            this.Visible
             &&
-            (this.aMouse.clientY >= this.AbsoluteY)
+            (pMouse.clientX >= this.AbsoluteX)
             &&
-            (this.aMouse.clientY <= this.AbsoluteY + this.Height)
+            (pMouse.clientX <= this.AbsoluteX + this.Width)
+            &&
+            (pMouse.clientY >= this.AbsoluteY)
+            &&
+            (pMouse.clientY <= this.AbsoluteY + this.Height)
         )
         {
-            this.aComponents.forEach
-            (
-                vComponentFound =>
+            for(let vIndex = 0; vIndex < this.aComponents.length; vIndex++)
+            {
+                const vComponentFound = this.aComponents[vIndex];
+                if(this.aMouseFocus = vComponentFound.mUpdateMouseFocus(pMouse))
                 {
-                    this.aMouseFocus = vComponentFound.mUpdateMouseFocus(pMouse);
+                    return this.aMouseFocus;
                 }
-            );
-
+            }
             if(this.aMouseFocusable && this.aMouseFocus === null)
             {
                 this.aMouseFocus = this;
@@ -147,5 +165,5 @@ class SizeableComponent extends GraphicComponent
     }
 }
 
-export {SizeableComponent};
-export default {SizeableComponent};
+export {MouseFocusable};
+export default {MouseFocusable};

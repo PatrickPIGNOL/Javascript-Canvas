@@ -11,7 +11,8 @@ const EMainMenuStatus = Object.freeze
     {
         FadeIn:0,
         Wait:1,
-        FadeOut:2
+        FadeOut:2,
+        Closed:3
     }
 );
 
@@ -34,11 +35,14 @@ class MainMenuScene extends Scene
         this.aDown = false; 
         this.aMouse = null;
         this.aTimer = 0;
-        this.aStatus = EMainMenuStatus.FadeIn;
-        this.aMainMenuWindow = new MainMenuWindow();
-        this.mAddOnAllEventListener(this.aMainMenuWindow);
+        this.aStatus = EMainMenuStatus.Closed;
+        this.aMainMenuWindow = new MainMenuWindow(this, 0, 0, 200, 400);
+        this.mAddOnUpdateEventListener(this.aMainMenuWindow);
+        this.mAddOnDrawEventListener(this.aMainMenuWindow);
         this.aMouse = Mouse.Instance;
-        this.mAddOnAllEventListener(this.aMouse);
+        this.mAddOnUpdateEventListener(this.aMouse);
+        this.mAddOnDrawEventListener(this.aMouse);
+        this.mAddOnMouseMoveEventListener(this.aMouse);
     }
 
     mOnLoadEventHandler()
@@ -48,6 +52,7 @@ class MainMenuScene extends Scene
         this.aAlpha = 0;
         this.aStatus = EMainMenuStatus.FadeIn;
         this.aTimer = 0;
+        this.Visible = true;
     }
 
     mOnUnLoadEventHandler()
@@ -57,6 +62,7 @@ class MainMenuScene extends Scene
 
     mOnUpdateEventHandler(pCanvas, pDeltaTime)
     {
+        super.mOnUpdateEventHandler(pCanvas, pDeltaTime);
         this.aTimer += pDeltaTime;
         switch(this.aStatus)
         {
@@ -89,8 +95,13 @@ class MainMenuScene extends Scene
                 if(this.aTimer > 3000)
                 {
                     this.aTimer = 0;
+                    this.aStatus = EMainMenuStatus.Closed;
                     GameEngine.Instance.mChangeScene(IntroScene.Instance);
                 }
+            }break;
+            case EMainMenuStatus.Closed:
+            {
+                this.Visible = false;
             }break;
         }    
     }
@@ -104,6 +115,12 @@ class MainMenuScene extends Scene
         
         pGraphicContext.globalAlpha = 1;
     }
+    /*
+    mOnMouseMoveEventHandler(pEvent)
+    {
+        super.mOnMouseMoveEventHandler(pEvent);
+    }
+    */
 }
 
 export {EMainMenuStatus};

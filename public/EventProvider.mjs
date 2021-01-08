@@ -23,89 +23,105 @@ class EventProvider
         this.aOnUnLoadEventListeners = new Array();
         this.aOnUpdateEventListeners = new Array(); 
         this.aOnDrawEventListeners = new Array(); 
-        this.aOnResizeEventListeners = new Array(); 
-
+        this.aOnResizeEventListeners = new Array();
         this.mAddOnAllEventListener(this);
     }
 
-    mOnClickEventHandler(pClickEvent)
+    mOnClickEventHandler(pEvent)
     {
-
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnDoubleClickEventHandler(pDoubleClickEvent)
+    mOnDoubleClickEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;        
     }
 
-    mOnKeyDownEventHandler(pKeyDownEvent)
+    mOnKeyDownEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnKeyUpEventHandler(pKeyUpEvent)
+    mOnKeyUpEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnMouseDownEventHandler(pMouseDownEvent)
+    mOnMouseDownEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnMouseEnterEventHandler(pMouseEnterEvent)
+    mOnMouseEnterEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
     
-    mOnMouseLeaveEventHandler(pMouseLeaveEvent)
+    mOnMouseLeaveEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
     
-    mOnMouseMoveEventHandler(pMouseMoveEvent)
+    mOnMouseMoveEventHandler(pEvent)
     {
-        
+        console.log("EventProvider mOnMouseMoveEvent")
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnMouseOutEventHandler(pMouseOutEvent)
+    mOnMouseOutEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnMouseOverEventHandler(pMouseOverEvent)
+    mOnMouseOverEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnMouseUpEventHandler(pMouseUpEvent)
+    mOnMouseUpEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
     
-    mOnTouchCancelEventHandler(pTouchCancelEvent)
+    mOnTouchCancelEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnTouchEndEventHandler(pTouchEndEvent)
+    mOnTouchEndEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
     
-    mOnTouchLeaveEventHandler(pTouchLeaveEvent)
+    mOnTouchLeaveEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnTouchMoveEventHandler(pTouchMoveEvent)
+    mOnTouchMoveEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
-    mOnTouchStartEventHandler(pTouchStartEvent)
+    mOnTouchStartEventHandler(pEvent)
     {
-        
+        pEvent.preventDefault();
+        return false;
     }
 
     mOnLoadEventHandler()
@@ -133,7 +149,7 @@ class EventProvider
 
     }
 
-    mOnClickEvent          (pClickEvent)
+    mOnClickEvent          (pEvent)
     { 
         this.aOnClickEventListeners.forEach
         (
@@ -143,18 +159,18 @@ class EventProvider
                 {
                     if(vOnClickEventListener === this)
                     {
-                        vOnClickEventListener.mOnClickEventHandler(pClickEvent);
+                        vOnClickEventListener.mOnClickEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnClickEventListener.mOnClickEvent(pClickEvent);
+                        vOnClickEventListener.mOnClickEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnDoubleClickEvent    (pDoubleClickEvent)
+    mOnDoubleClickEvent    (pEvent)
     { 
         this.aOnDoubleClickEventListeners.forEach
         (
@@ -164,18 +180,18 @@ class EventProvider
                 {
                     if(vOnDoubleClickEventListener === this)
                     {
-                        vOnDoubleClickEventListener.mOnDoubleClickEventHandler(pDoubleClickEvent);
+                        vOnDoubleClickEventListener.mOnDoubleClickEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnDoubleClickEventListener.mOnDoubleClickEvent(pDoubleClickEvent);
+                        vOnDoubleClickEventListener.mOnDoubleClickEvent(pEvent);
                     }
                 }
             }
         );
     }
     
-    mOnKeyDownEvent        (pKeyDownEvent)
+    mOnKeyDownEvent        (pEvent)
     { 
         this.aOnKeyDownEventListeners.forEach
         (
@@ -185,18 +201,18 @@ class EventProvider
                 {
                     if(vOnKeyDownEventListener === this)
                     {
-                        vOnKeyDownEventListener.mOnKeyDownEventHandler(pKeyDownEvent);
+                        vOnKeyDownEventListener.mOnKeyDownEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnKeyDownEventListener.mOnKeyDownEvent(pKeyDownEvent);
+                        vOnKeyDownEventListener.mOnKeyDownEvent(pEvent);
                     }
                 }
             }
         );
     }
     
-    mOnKeyUpEvent          (pKeyUpEvent)
+    mOnKeyUpEvent          (pEvent)
     { 
         this.aOnKeyUpEventListeners.forEach
         (
@@ -206,18 +222,18 @@ class EventProvider
                 {
                     if(vOnKeyUpEventListener === this)
                     {
-                        vOnKeyUpEventListener.mOnKeyUpEventHandler(pKeyUpEvent);
+                        vOnKeyUpEventListener.mOnKeyUpEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnKeyUpEventListener.mOnKeyUpEvent(pKeyUpEvent);
+                        vOnKeyUpEventListener.mOnKeyUpEvent(pEvent);
                     }
                 }
             }
         );
     }
     
-    mOnMouseDownEvent      (pMouseDownEvent)
+    mOnMouseDownEvent      (pEvent)
     { 
         this.aOnMouseDownEventListeners.forEach
         (
@@ -227,18 +243,18 @@ class EventProvider
                 {
                     if(vOnMouseDownEventListener === this)
                     {
-                        vOnMouseDownEventListener.mOnMouseDownEventHandler(pMouseDownEvent);
+                        vOnMouseDownEventListener.mOnMouseDownEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseDownEventListener.mOnMouseDownEvent(pMouseDownEvent);
+                        vOnMouseDownEventListener.mOnMouseDownEvent(pEvent);
                     }
                 }
             }
         );
     }
     
-    mOnMouseEnterEvent     (pMouseEnterEvent)
+    mOnMouseEnterEvent     (pEvent)
     { 
         this.aOnMouseEnterEventListeners.forEach
         (
@@ -248,18 +264,18 @@ class EventProvider
                 {
                     if(vOnMouseEnterEventListener === this)
                     {
-                        vOnMouseEnterEventListener.mOnMouseEnterEventHandler(pMouseEnterEvent);
+                        vOnMouseEnterEventListener.mOnMouseEnterEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseEnterEventListener.mOnMouseEnterEvent(pMouseEnterEvent);
+                        vOnMouseEnterEventListener.mOnMouseEnterEvent(pEvent);
                     }
                 }
             }
         );
     }
     
-    mOnMouseLeaveEvent     (pMouseLeaveEvent)
+    mOnMouseLeaveEvent     (pEvent)
     { 
         this.aOnMouseLeaveEventListeners.forEach
         (
@@ -269,18 +285,18 @@ class EventProvider
                 {
                     if(vOnMouseLeaveEventListener === this)
                     {
-                        vOnMouseLeaveEventListener.mOnMouseLeaveEventHandler(pMouseLeaveEvent);
+                        vOnMouseLeaveEventListener.mOnMouseLeaveEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseLeaveEventListener.mOnMouseLeaveEvent(pMouseLeaveEvent);                        
+                        vOnMouseLeaveEventListener.mOnMouseLeaveEvent(pEvent);                        
                     }
                 }
             }
         );
     }
     
-    mOnMouseMoveEvent      (pMouseMoveEvent)
+    mOnMouseMoveEvent      (pEvent)
     { 
         this.aOnMouseMoveEventListeners.forEach
         (
@@ -290,18 +306,18 @@ class EventProvider
                 {
                     if(vOnMouseMoveEventListener === this)
                     {
-                        vOnMouseMoveEventListener.mOnMouseMoveEventHandler(pMouseMoveEvent);
+                        vOnMouseMoveEventListener.mOnMouseMoveEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseMoveEventListener.mOnMouseMoveEvent(pMouseMoveEvent);
+                        vOnMouseMoveEventListener.mOnMouseMoveEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnMouseOutEvent       (pMouseOutEvent)
+    mOnMouseOutEvent       (pEvent)
     { 
         this.aOnMouseOutEventListeners.forEach
         (
@@ -311,18 +327,18 @@ class EventProvider
                 {
                     if(vOnMouseOutEventListener === this)
                     {
-                        vOnMouseOutEventListener.mOnMouseOutEventHandler(pMouseOutEvent);
+                        vOnMouseOutEventListener.mOnMouseOutEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseOutEventListener.mOnMouseOutEvent(pMouseOutEvent);
+                        vOnMouseOutEventListener.mOnMouseOutEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnMouseOverEvent      (pMouseOverEvent)
+    mOnMouseOverEvent      (pEvent)
     { 
         this.aOnMouseOverEventListeners.forEach
         (
@@ -332,18 +348,18 @@ class EventProvider
                 {
                     if(vOnMouseOverEventListener === this)
                     {
-                        vOnMouseOverEventListener.mOnMouseOverEventHandler(pMouseOverEvent);
+                        vOnMouseOverEventListener.mOnMouseOverEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseOverEventListener.mOnMouseOverEvent(pMouseOverEvent);
+                        vOnMouseOverEventListener.mOnMouseOverEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnMouseUpEvent        (pMouseUpEvent)
+    mOnMouseUpEvent        (pEvent)
     { 
         this.aOnMouseUpEventListeners.forEach
         (
@@ -353,18 +369,18 @@ class EventProvider
                 {
                     if(vOnMouseUpEventListener === this)
                     {
-                        vOnMouseUpEventListener.mOnMouseUpEventHandler(pMouseUpEvent);
+                        vOnMouseUpEventListener.mOnMouseUpEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnMouseUpEventListener.mOnMouseUpEvent(pMouseUpEvent); 
+                        vOnMouseUpEventListener.mOnMouseUpEvent(pEvent); 
                     }
                 }
             }
         );
     }
 
-    mOnTouchCancelEvent    (pTouchCancelEvent)
+    mOnTouchCancelEvent    (pEvent)
     { 
         this.aOnTouchCancelEventListeners.forEach
         (
@@ -374,18 +390,18 @@ class EventProvider
                 {
                     if(vOnTouchCancelEventListener === this)
                     {
-                        vOnTouchCancelEventListener.mOnTouchCancelEventHandler(pTouchCancelEvent);
+                        vOnTouchCancelEventListener.mOnTouchCancelEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnTouchCancelEventListener.mOnTouchCancelEvent(pTouchCancelEvent);                        
+                        vOnTouchCancelEventListener.mOnTouchCancelEvent(pEvent);                        
                     }
                 }
             }
         );
     }
 
-    mOnTouchEndEvent       (pTouchEndEvent)
+    mOnTouchEndEvent       (pEvent)
     { 
         this.aOnTouchEndEventListeners.forEach
         (
@@ -395,18 +411,18 @@ class EventProvider
                 {
                     if(vOnTouchEndEventListener === this)
                     {
-                        vOnTouchEndEventListener.mOnTouchEndEventHandler(pTouchEndEvent);
+                        vOnTouchEndEventListener.mOnTouchEndEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnTouchEndEventListener.mOnTouchEndEvent(pTouchEndEvent);
+                        vOnTouchEndEventListener.mOnTouchEndEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnTouchLeaveEvent     (pTouchLeaveEvent)
+    mOnTouchLeaveEvent     (pEvent)
     { 
         this.aOnTouchLeaveEventListeners.forEach
         (
@@ -416,18 +432,18 @@ class EventProvider
                 {
                     if(vOnTouchLeaveEventListener === this)
                     {
-                        vOnTouchLeaveEventListener.mOnTouchLeaveEventHandler(pTouchLeaveEvent);
+                        vOnTouchLeaveEventListener.mOnTouchLeaveEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnTouchLeaveEventListener.mOnTouchLeaveEventHandler(pTouchLeaveEvent);
+                        vOnTouchLeaveEventListener.mOnTouchLeaveEventHandler(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnTouchMoveEvent      (pTouchMoveEvent)
+    mOnTouchMoveEvent      (pEvent)
     { 
         this.aOnTouchMoveEventListeners.forEach
         (
@@ -437,18 +453,18 @@ class EventProvider
                 {
                     if(vOnTouchMoveEventListener === this)
                     {
-                        vOnTouchMoveEventListener.mOnTouchMoveEventHandler(pTouchMoveEvent);
+                        vOnTouchMoveEventListener.mOnTouchMoveEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnTouchMoveEventListener.mOnTouchMoveEvent(pTouchMoveEvent);
+                        vOnTouchMoveEventListener.mOnTouchMoveEvent(pEvent);
                     }
                 }
             }
         );
     }
 
-    mOnTouchStartEvent     (pTouchStartEvent)
+    mOnTouchStartEvent     (pEvent)
     { 
         this.aOnTouchStartEventListeners.forEach
         (
@@ -458,11 +474,11 @@ class EventProvider
                 {
                     if(vOnTouchStartEventListener === this)
                     {
-                        vOnTouchStartEventListener.mOnTouchStartEventHandler(pTouchStartEvent);
+                        vOnTouchStartEventListener.mOnTouchStartEventHandler(pEvent);
                     }
                     else
                     {
-                        vOnTouchStartEventListener.mOnTouchStartEvent(pTouchStartEvent);
+                        vOnTouchStartEventListener.mOnTouchStartEvent(pEvent);
                     }
                 }
             }
