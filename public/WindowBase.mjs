@@ -129,12 +129,13 @@ class WindowBase extends MouseFocusable
             this.MouseFocus.mOnClickEvent(pClickEvent);
         }
     }
-
+    /*
     mOnMouseMoveEventHandler(pOnMouseMoveEvent)
     {
         super.mOnMouseMoveEventHandler(pOnMouseMoveEvent)
         console.log("WindowBase mOnMouseMoveEventHandler")
     }
+    */
 }
 
 export { WindowState };

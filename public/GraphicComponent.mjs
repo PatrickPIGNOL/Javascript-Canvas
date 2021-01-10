@@ -29,11 +29,12 @@ class GraphicComponent extends EventProvider
     {
         this.aVisible = pVisible
     }
+    /*
     mOnMouseMoveEventHandler(pOnMouseMoveEvent)
     {
         super.mOnMouseMoveEventHandler(pOnMouseMoveEvent);
-        console.log("GraphicComponent mOnMouseMoveEventHandler")
     }
+    */
 }
 
 export {GraphicComponent};

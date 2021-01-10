@@ -70,8 +70,7 @@ class EventProvider
     }
     
     mOnMouseMoveEventHandler(pEvent)
-    {
-        console.log("EventProvider mOnMouseMoveEvent")
+    {        
         pEvent.preventDefault();
         return false;
     }

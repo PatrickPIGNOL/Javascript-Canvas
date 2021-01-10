@@ -64,8 +64,7 @@ class GameEngine extends EventProvider
     
     mOnMouseMoveEventHandler(pMouseMoveEvent)
     {
-        super.mOnMouseMoveEventHandler(pMouseMoveEvent);
-        console.log("GameEngine mOnMouseMoveEventHandler")
+        //super.mOnMouseMoveEventHandler(pMouseMoveEvent);
         this.aScene.mOnMouseMoveEvent(pMouseMoveEvent);
     }
 

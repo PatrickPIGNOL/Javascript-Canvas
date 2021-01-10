@@ -119,8 +119,7 @@ class IntroScene extends Scene
     
     mOnMouseMoveEventHandler(pEvent)
     {
-        super.mOnMouseMoveEventHandler(pEvent);
-        console.log("IntroScene mOnMouseMoveEventHandler")
+        //super.mOnMouseMoveEventHandler(pEvent);
         this.aMouse = pEvent;
     }
 }

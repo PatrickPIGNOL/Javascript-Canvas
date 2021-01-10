@@ -97,7 +97,7 @@ class Button extends MouseFocusable
             //--------
 
             pGraphicContext.save();
-            pGraphicContext.translate(this.AbsoluteX + this.Width - 8, this.AbsoluteY);
+            pGraphicContext.translate(this.AbsoluteX + this.Width - 7, this.AbsoluteY);
 
             pGraphicContext.fillStyle = pGraphicContext.createPattern(Loader.Images[EImage.East.Index], "repeat");
             pGraphicContext.fillRect(0, 0, 8, this.Height);
@@ -135,12 +135,13 @@ class Button extends MouseFocusable
             pGraphicContext.globalAlpha = 1;
         }
     }
-    
+    /*
     mOnMouseMoveEventHandler(pEvent)
     {
         super.mOnMouseMoveEventHandler(pEvent);
         console.log("Button mOnMouseMoveEventHandler");
     }
+    */
 }
 
 

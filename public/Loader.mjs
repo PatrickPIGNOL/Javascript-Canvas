@@ -84,7 +84,6 @@ class Loader
         if(pFontFiles && pFontFiles.length > 0)
         {
             const vFontFile = pFontFiles.shift();
-            console.log("FontFile: "+vFontFile.FileName);
             const vFont = new FontFace(vFontFile.Name, `url(${vFontFile.FileName})`);
             Loader.aFonts.push(vFont);
 

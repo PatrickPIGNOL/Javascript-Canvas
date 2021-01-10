@@ -13,11 +13,13 @@ class Scene extends MouseFocusable
         this.Width = pCanvas.width;
         this.Height = pCanvas.height;
     }
+    /*
     mOnMouseMoveEventHandler(pOnMouseMoveEventHandler)
     {
         super.mOnMouseMoveEventHandler(pOnMouseMoveEventHandler);
         console.log("Scene mOnMouseMoveEventHandler")
     }
+    */
 }
 
 export {Scene};
