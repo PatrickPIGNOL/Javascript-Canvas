@@ -4,6 +4,10 @@ class EventProvider
     {
         this.aOnClickEventListeners = new Array();
         this.aOnDoubleClickEventListeners = new Array();
+        this.aOnDragEventListeners = new Array();
+        this.aOnDragMoveEventListeners = new Array();
+        this.aOnDragDropEventListeners = new Array();
+        this.aOnDropEventListeners = new Array();
         this.aOnKeyDownEventListeners = new Array();
         this.aOnKeyUpEventListeners = new Array();
         this.aOnMouseDownEventListeners = new Array();
@@ -37,6 +41,21 @@ class EventProvider
     {
         pEvent.preventDefault();
         return false;        
+    }
+
+    mOnDragEventHandler(pEvent)
+    {
+        return false;
+    }
+
+    mOnDragMoveEventHandler(pEvent)
+    {
+        return false;
+    }
+
+    mOnDragDropEventHandler(pEvent)
+    {
+        return false;
     }
 
     mOnKeyDownEventHandler(pEvent)
@@ -184,6 +203,90 @@ class EventProvider
                     else
                     {
                         vOnDoubleClickEventListener.mOnDoubleClickEvent(pEvent);
+                    }
+                }
+            }
+        );
+    }
+
+    mOnDragEvent(pEvent)
+    {
+        this.aOnDragEventListeners.forEach
+        (
+            vOnDragEventListener=>
+            {
+                if(vOnDragEventListener)
+                {
+                    if(vOnDragEventListener === this)
+                    {
+                        vOnDragEventListener.mOnDragEventHandler(pEvent);
+                    }
+                    else
+                    {
+                        vOnDragEventListener.mOnDragEvent(pEvent);
+                    }
+                }
+            }
+        );
+    }
+
+    mOnDragEvent(pEvent)
+    {
+        this.aOnDragEventListeners.forEach
+        (
+            vOnDragEventListener=>
+            {
+                if(vOnDragEventListener)
+                {
+                    if(vOnDragEventListener === this)
+                    {
+                        vOnDragEventListener.mOnDragEventHandler(pEvent);
+                    }
+                    else
+                    {
+                        vOnDragEventListener.mOnDragEvent(pEvent);
+                    }
+                }
+            }
+        );
+    }
+
+    mOnDragMoveEvent(pEvent)
+    {
+        this.aOnDragMoveEventListeners.forEach
+        (
+            vOnDragMoveEventListener=>
+            {
+                if(vOnDragMoveEventListener)
+                {
+                    if(vOnDragMoveEventListener === this)
+                    {
+                        vOnDragMoveEventListener.mOnDragMoveEventHandler(pEvent);
+                    }
+                    else
+                    {
+                        vOnDragMoveEventListener.mOnDragMoveEvent(pEpEvent);
+                    }
+                }
+            }
+        );
+    }
+
+    mOnDragDropEvent(pEvent)
+    {
+        this.aOnDragDropEventListeners.forEach
+        (
+            vOnDragDropEventListener=>
+            {
+                if(vOnDragDropEventListener)
+                {
+                    if(vOnDragDropEventListener === this)
+                    {
+                        vOnDragDropEventListener.mOnDragDropEventHandler(pEvent);
+                    }
+                    else
+                    {
+                        vOnDragDropEventListener.mOnDragDropEvent(pEvent);
                     }
                 }
             }
@@ -595,6 +698,9 @@ class EventProvider
         {
             this.mAddOnClickEventListener       (pEventListener);
             this.mAddOnDoubleClickEventListener (pEventListener);
+            this.mAddOnDragEventListener        (pEventListener);
+            this.mAddOnDragMoveEventListener    (pEventListener);
+            this.mAddOnDragDropEventListener    (pEventListener);
             this.mAddOnKeyDownEventListener     (pEventListener);
             this.mAddOnKeyUpEventListener       (pEventListener);
             this.mAddOnMouseDownEventListener   (pEventListener);
@@ -638,6 +744,42 @@ class EventProvider
         if(pEventListener)
         {
             return this.aOnDoubleClickEventListeners.push(pEventListener);
+        }
+        else
+        {
+            throw new Error("Observer provided is null or undefined.");
+        }
+    }
+
+    mAddOnDragEventListener(pEventListener)
+    {
+        if(pEventListener)
+        {
+            return this.aOnDragEventListeners.push(pEventListener);
+        }
+        else
+        {
+            throw new Error("Observer provided is null or undefined.");
+        }
+    }
+
+    mAddOnDragMoveEventListener(pEventListener)
+    {
+        if(pEventListener)
+        {
+            return this.aOnDragMoveEventListeners.push(pEventListener);
+        }
+        else
+        {
+            throw new Error("Observer provided is null or undefined.");
+        }
+    }
+
+    mAddOnDragDropEventListener(pEventListener)
+    {
+        if(pEventListener)
+        {
+            return this.aOnDragDropEventListeners.push(pEventListener);
         }
         else
         {

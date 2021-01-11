@@ -11,7 +11,7 @@ const EButtonStates = Object.freeze
 )
 */
 
-class Button extends MouseFocusable
+export class Button extends MouseFocusable
 {
     constructor(pParent, pX, pY, pWidth, pHeight, pText)
     {
@@ -122,9 +122,9 @@ class Button extends MouseFocusable
             pGraphicContext.drawImage(Loader.Images[EImage.CornerSW.Index], this.AbsoluteX, this.AbsoluteY + this.Height - 8);
 
             pGraphicContext.fillStyle = this.aTextColor;
-            pGraphicContext.font = this.TextSize + ' ' + this.aFont.Name;
 
             pGraphicContext.save();
+            pGraphicContext.font = this.TextSize + ' ' + this.aFont.Name;
             pGraphicContext.beginPath();
             pGraphicContext.rect(this.AbsoluteX, this.AbsoluteY, this.Width, this.Height);
             pGraphicContext.clip();
@@ -146,5 +146,4 @@ class Button extends MouseFocusable
 
 
 //export { EButtonStates };
-export { Button };
 export default { Button };

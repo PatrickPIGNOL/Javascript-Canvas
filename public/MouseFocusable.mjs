@@ -1,4 +1,46 @@
 import {GraphicComponent} from "./GraphicComponent.mjs";
+import {DragDropEvent} from "./DragDropEvent.mjs"
+
+const MouseButtons = Object.freeze
+(
+    {
+        None:
+        {
+            Mask: 65535,
+            Value: 0
+        },
+        Button1:
+        {
+            Mask: 1,
+            Value: 1
+        },
+        Button2:
+        {
+            Mask: 2,
+            Value: 2
+        },
+        Button3:
+        {
+            Mask: 4,
+            Value: 4
+        },
+        Button4:
+        {
+            Mask: 8,
+            Value: 8
+        },
+        Button5:
+        {
+            Mask: 16,
+            Value: 16
+        },
+        Button6:
+        {
+            Mask: 32,
+            Value: 32
+        }
+    }
+);
 
 class MouseFocusable extends GraphicComponent
 {
@@ -15,7 +57,36 @@ class MouseFocusable extends GraphicComponent
         this.aY = pY;
         this.aWidth = pWidth;
         this.aHeight = pHeight;
+        this.aDown = false;
+        this.aDragable = false;
+        this.aDraged = false;
+        this.aDragDropEvent = null;
         this.aMouseFocusable = false;     
+    }
+
+    get DragDropEvent()
+    {
+        return this.aDragDropEvent;
+    }
+
+    get Dragable()
+    {
+        return this.aDragable;
+    }
+
+    set Dragable(pDragable)
+    {
+        this.aDragable = pDragable;
+    }
+
+    get Draged()
+    {
+        return this.aDraged;
+    }
+
+    set Draged(pDraged)
+    {
+        this.aDraged = pDraged;
     }
 
     get Components()
@@ -29,9 +100,23 @@ class MouseFocusable extends GraphicComponent
         pComponent.mOnLoadEvent();
     }
 
+    mRemoveComponent(pComponent)
+    {
+        const vIndex = this.aComponents.indexOf(pComponent);
+        if(vIndex >= 0)
+        {
+            this.aComponents.splice(vIndex, 1);
+        }
+    }
+
     get Parent()
     {
         return this.aParent;
+    }
+
+    set Parent(pParent)
+    {
+        this.aParent = pParent;
     }
 
     get AbsoluteX()
@@ -113,6 +198,17 @@ class MouseFocusable extends GraphicComponent
         this.aMouseFocusable = pMouseFocusable;
     }
 
+    mAllowDrop(pEvent)
+    {
+        false;
+    }
+
+    mDropZone(pEvent)
+    {
+        const vRectangle = new Rectangle(0,0,0,0);
+        return vRectangle;
+    }
+
     mOnClickEventHandler(pEvent)
     {
         super.mOnClickEventHandler(pEvent);
@@ -122,14 +218,69 @@ class MouseFocusable extends GraphicComponent
         }
     }
 
+    mOnMouseDownEventHandler(pEvent)
+    {
+        this.aPreviousState = pEvent;
+    }
+
+    mOnMouseUpEventHandler(pEvent)
+    {
+        this.aPreviousState = pEvent;
+    }
+
     mOnMouseMoveEventHandler(pEvent)
     {
         super.mOnMouseMoveEventHandler(pEvent);
         this.aMouseFocus = this.mUpdateMouseFocus(pEvent);
-        if(this.MouseFocus && (this.MouseFocus !== this))
+        if
+        (
+            (this.aDragDropEvent === null)
+            &&
+            this.MouseFocus 
+            && 
+            (this.MouseFocus !== this)
+            && 
+            this.MouseFocus.Dragable 
+            && 
+            (!this.MouseFocus.Draged)
+            &&
+            (pEvent.buttons & MouseButtons.Button1.Mask === MouseButtons.Button1.Value)
+        )
+        {
+            this.aDragDropEvent = new DragDropEvent(this.MouseFocus, pEvent);
+            this.MouseFocus.mOnDragEvent(this.aDragDropEvent);
+        }
+        else if
+        (
+            this.aDragDropEvent
+            &&
+            this.aDragDropEvent.MouseFocusable.Draged
+            &&
+            ((pEvent.buttons & MouseButtons.Button1.Mask) !== MouseButtons.Button1.Value)
+        )
+        {
+            this.aDragDropEvent.mDrop(pEvent, this.MouseFocus);
+            this.aDragDropEvent.MouseFocusable.mOnDragDropEvent(this.aDragDropEvent);
+            this.aDragDropEvent = null;
+        }
+        else if 
+        (
+            this.aDragDropEvent 
+        )
+        {
+            this.aDragDropEvent.mUpdate(pEvent, this.MouseFocus);
+            this.aDragDropEvent.MouseFocusable.mOnDragMoveEventHandler(this.aDragDropEvent);
+        }
+        else if
+        (
+            this.MouseFocus 
+            && 
+            (this.MouseFocus !== this)
+        )
         {
             this.MouseFocus.mOnMouseMoveEvent(pEvent);
         }
+        this.aPreviousState = pEvent;
     }
 
     mUpdateMouseFocus(pMouse)
@@ -138,6 +289,8 @@ class MouseFocusable extends GraphicComponent
         if
         (
             this.Visible
+            &&
+            (!this.Draged)
             &&
             (pMouse.clientX >= this.AbsoluteX)
             &&
