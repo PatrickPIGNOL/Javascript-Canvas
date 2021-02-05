@@ -1,4 +1,4 @@
-import {MouseFocusable} from("./MouseFocusable.js")
+import {MouseFocusable} from "./MouseFocusable.js"
 //24x32
 //13x18 topwall
 //13x21 Wall

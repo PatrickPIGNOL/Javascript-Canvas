@@ -36,7 +36,7 @@ function mHTMLHeader(pTitle)
     </head>
     <body>
     <canvas id='canvas'></canvas>
-    <script type='module' src='./Loader.mjs'></script>`;
+    <script type='module' src='./Loader.js'></script>`;
     return vHTML;
 }
 
