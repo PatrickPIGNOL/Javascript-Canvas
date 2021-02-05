@@ -1,8 +1,8 @@
 
-import {EventProvider} from "./EventProvider.mjs";
-import {EBrowsers} from "./Loader.mjs";
+import {EventProvider} from "./EventProvider.js";
+import {EBrowsers} from "./Loader.js";
 
-class GameEngine extends EventProvider
+export class GameEngine extends EventProvider
 {
     static aInstance = null;
     static get Instance()
@@ -64,7 +64,6 @@ class GameEngine extends EventProvider
     
     mOnMouseMoveEventHandler(pMouseMoveEvent)
     {
-        //super.mOnMouseMoveEventHandler(pMouseMoveEvent);
         this.aScene.mOnMouseMoveEvent(pMouseMoveEvent);
     }
 
@@ -279,7 +278,8 @@ class GameEngine extends EventProvider
             pMouseLeaveEvent => 
             {
                 GameEngine.Instance.mOnMouseLeaveEvent(pMouseLeaveEvent);
-            }
+            },
+            false
         );
         this.aCanvas.addEventListener
         (
@@ -361,5 +361,4 @@ class GameEngine extends EventProvider
     }
 }
 
-export {GameEngine};
 export default {GameEngine};

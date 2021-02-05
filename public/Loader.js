@@ -1,9 +1,9 @@
 "use strict";
 
-import {GameEngine} from "./GameEngine.mjs";
-import {IntroScene} from "./IntroScene.mjs";
+import {GameEngine} from "./GameEngine.js";
+import {IntroScene} from "./IntroScene.js";
 
-const EBrowsers = Object.freeze
+export const EBrowsers = Object.freeze
 (
     {
         None: 0,
@@ -18,7 +18,7 @@ const EBrowsers = Object.freeze
     }
 );
 
-class Loader
+export class Loader
 {
     static aImages = new Array();
     static aFonts = new Array();
@@ -146,7 +146,7 @@ class Loader
     }
 }
 
-const EImage = Object.freeze
+export const EImage = Object.freeze
 (
     {
         Logo: 
@@ -248,11 +248,16 @@ const EImage = Object.freeze
         {
             Index: 19,
             FileName: "./Images/ButtonBackGround.png"
+        },
+        SpriteSheet:
+        {
+            Index: 19,
+            FileName: "./Images/SpriteSheet.png"
         }
     }
 );
 
-const EFonts = Object.freeze
+export const EFonts = Object.freeze
 (
     {
         Buffied: 
@@ -306,9 +311,4 @@ function OnWindowLoad()
     );
 }
 
-
-export {EBrowsers};
-export {Loader};
 export default {Loader};
-export {EImage};
-export {EFonts};

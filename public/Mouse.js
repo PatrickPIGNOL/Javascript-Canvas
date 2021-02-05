@@ -1,5 +1,5 @@
-import {GraphicComponent} from "./GraphicComponent.mjs";
-import {Loader, EImage} from "./Loader.mjs";
+import {GraphicComponent} from "./GraphicComponent.js";
+import {Loader, EImage} from "./Loader.js";
 
 class Mouse extends GraphicComponent
 {

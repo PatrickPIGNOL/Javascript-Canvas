@@ -1,8 +1,11 @@
 
-import {WindowBase} from "./WindowBase.mjs";
-import {Button} from "./Button.mjs";
-import {MainMenuButton} from "./MainMenuButton.mjs";
-import {Loader, EImage} from "./Loader.mjs";
+import {WindowBase} from "./WindowBase.js";
+import {Button} from "./Button.js";
+import {MainMenuButton} from "./MainMenuButton.js";
+import {Loader, EImage} from "./Loader.js";
+import {Rectangle} from "./Rectangle.js";
+import {GameEngine} from "./GameEngine.js";
+import {LevelScene} from "./LevelScene.js";
 
 const WindowState = Object.freeze
 (
@@ -46,14 +49,8 @@ class MainMenuWindow extends WindowBase
         this.aNewGameButton = new MainMenuButton(this, 10, 130, 180, 40,    " New Game ");
         this.aNewGameButton.mOnClickEventHandler = function (pEvent)
             {
-                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
-                {
-                    this.TextColor = "rgba(0, 255, 0, 1.0)";
-                }
-                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
-                {
-                    this.TextColor = "rgba(231, 212, 184, 1.0)";
-                }
+				alert("clicked")
+                GameEngine.Instance.mChangeScene(LevelScene.Instance);
             };
         this.aLoadButton = new MainMenuButton(this, 10, 180, 180, 40,       "      Load ");
         this.aLoadButton.mOnClickEventHandler = function (pEvent)
@@ -68,12 +65,44 @@ class MainMenuWindow extends WindowBase
                 }
             };
         this.aOptionsButton = new MainMenuButton(this, 10, 230, 180, 40,       "   Options ");
+		this.aOptionsButton.mOnClickEventHandler = function (pEvent)
+            {
+                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
+                {
+                    this.TextColor = "rgba(0, 255, 0, 1.0)";
+                }
+                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
+                {
+                    this.TextColor = "rgba(231, 212, 184, 1.0)";
+                }
+            };
         this.aCreditsButton = new MainMenuButton(this, 10, 280, 180, 40,       "   Crédits ");
+		this.aCreditsButton.mOnClickEventHandler = function (pEvent)
+            {
+                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
+                {
+                    this.TextColor = "rgba(0, 255, 0, 1.0)";
+                }
+                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
+                {
+                    this.TextColor = "rgba(231, 212, 184, 1.0)";
+                }
+            };
         this.aTimer = 0;
         this.Visible = false;
         this.aState = WindowState.Closed
     }
-
+    
+    mOnDropEventHandler(pEvent)
+    {
+        pEvent.MouseFocusable.Parent.mRemoveComponent(pEvent.MouseFocusable);
+        pEvent.MouseFocusable.Parent = this;
+        pEvent.MouseFocusable.Parent.mAddComponent(pEvent.MouseFocusable);
+        pEvent.MouseFocusable.X = this.mDropZone(pEvent).X;
+        pEvent.MouseFocusable.Y = this.mDropZone(pEvent).Y;
+        pEvent.MouseFocusable.Width = this.mDropZone(pEvent).Width;
+        pEvent.MouseFocusable.Height = this.mDropZone(pEvent).Height;
+    }
 
     mOpen()
     {
@@ -273,13 +302,7 @@ class MainMenuWindow extends WindowBase
             pGraphicContext.globalAlpha = 1;
         }
     }
-    /*
-    mOnMouseMoveEventHandler(pEvent)
-    {
-        super.mOnMouseMoveEventHandler(pEvent);
-    }
-    */
 }
 
 export {MainMenuWindow};
-export default {MainMenuWindow};
+export default {MainMenuWindow}; 

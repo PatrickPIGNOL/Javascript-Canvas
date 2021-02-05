@@ -1,5 +1,5 @@
 
-import {MouseFocusable} from "./MouseFocusable.mjs";
+import {MouseFocusable} from "./MouseFocusable.js";
 class Scene extends MouseFocusable
 {
     constructor()

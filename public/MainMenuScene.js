@@ -1,10 +1,10 @@
-import {Scene} from "./Scene.mjs";
-import {MainMenuWindow} from "./MainMenuWindow.mjs";
-import {Mouse} from "./Mouse.mjs"
-import {GameEngine} from "./GameEngine.mjs"
-import {Loader, EImage} from "./Loader.mjs"
-import {IntroScene} from "./IntroScene.mjs";
-import {WindowBase} from "./WindowBase.mjs"
+import {Scene} from "./Scene.js";
+import {MainMenuWindow} from "./MainMenuWindow.js";
+import {Mouse} from "./Mouse.js"
+import {GameEngine} from "./GameEngine.js"
+import {Loader, EImage} from "./Loader.js"
+import {IntroScene} from "./IntroScene.js";
+import {WindowBase} from "./WindowBase.js"
 
 const EMainMenuStatus = Object.freeze
 (
@@ -113,14 +113,12 @@ class MainMenuScene extends Scene
         pGraphicContext.fillStyle = pGraphicContext.createPattern(Loader.Images[EImage.MenuBackGround.Index], "repeat");
         pGraphicContext.fillRect(0, 0, pCanvas.width, pCanvas.height);
         
+		if(this.DragDropEvent)
+		{
+			this.DragDropEvent.MouseFocusable.mOnDrawEvent(pCanvas, pGraphicContext);
+		}
         pGraphicContext.globalAlpha = 1;
     }
-    /*
-    mOnMouseMoveEventHandler(pEvent)
-    {
-        super.mOnMouseMoveEventHandler(pEvent);
-    }
-    */
 }
 
 export {EMainMenuStatus};

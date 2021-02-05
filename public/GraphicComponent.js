@@ -1,5 +1,5 @@
 
-import {EventProvider} from "./EventProvider.mjs";
+import {EventProvider} from "./EventProvider.js";
 class GraphicComponent extends EventProvider
 {
     constructor()

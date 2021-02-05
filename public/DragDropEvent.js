@@ -24,7 +24,7 @@ export class DragDropEvent
         return this.aMouseOrigin;
     }
 
-    get CurrentMousse()
+    get CurrentMouse()
     {
         return this.aCurrentMouse;
     }
@@ -40,15 +40,21 @@ export class DragDropEvent
         this.aTarget = pTarget;
         if(this.aTarget && this.aTarget.mAllowDrop(this))
         {
-            this.aMouseFocusable.X = this.aTarget.mDropZone(this).X + this.aTarget.AbsoluteX;
-            this.aMouseFocusable.Y = this.aTarget.mDropZone(this).Y + this.aTarget.AbsoluteY;
-            this.aMouseFocusable.Width = this.aTarget.mDropZone(this).Width;
-            this.aMouseFocusable.Height = this.aTarget.mDropZone(this).Height;
+			let vRectangle = this.aTarget.mDropZone(this);
+			if(vRectangle)
+			{
+				this.aMouseFocusable.X = vRectangle.X/* + this.aTarget.AbsoluteX*/;
+				this.aMouseFocusable.Y = vRectangle.Y/* + this.aTarget.AbsoluteY*/;
+				this.aMouseFocusable.Width = vRectangle.Width;
+				this.aMouseFocusable.Height = vRectangle.Height;
+			}
         }
         else
         {
-            this.aMouseFocusable.X = (this.aX - (this.aMouseOrigin.clientX - this.aParent.AbsoluteX)) + (pCurrentMouse.clientX - this.aParent.AbsoluteX);
-            this.aMouseFocusable.Y = (this.aY - (this.aMouseOrigin.clientY -                  this.aParent.AbsoluteY)) + (pCurrentMouse.clientY - this.aParent.AbsoluteY);
+            this.aMouseFocusable.X = 
+            (this.aX - (this.aMouseOrigin.clientX - this.aParent.AbsoluteX)) + 
+            (pCurrentMouse.clientX - this.aParent.AbsoluteX);
+            this.aMouseFocusable.Y = (this.aY - (this.aMouseOrigin.clientY - this.aParent.AbsoluteY)) + (pCurrentMouse.clientY - this.aParent.AbsoluteY);
             this.aMouseFocusable.Width = this.aWidth;
             this.aMouseFocusable.Height = this.aHeight;
         }
@@ -58,6 +64,7 @@ export class DragDropEvent
     {
         this.aCurrentMouse = pCurrentMouse;
         this.aTarget = pTarget;
+        this.aMouseFocusable.Draged = false;
         if
         (
             this.aTarget 
@@ -65,13 +72,7 @@ export class DragDropEvent
             this.aTarget.mAllowDrop(this)
         )
         {
-            this.aMouseFocusable.Parent.mRemoveComponent(this.aMouseFocusable);
-            this.aMouseFocusable.Parent = this.aTarget;
-            this.aMouseFocusable.Parent.mAddComponent(this.aMouseFocusable);
-            this.aMouseFocusable.X = this.aTarget.mDropZone(this).X;
-            this.aMouseFocusable.Y = this.aTarget.mDropZone(this).Y;
-            this.aMouseFocusable.Width = this.aTarget.mDropZone(this).Width;
-            this.aMouseFocusable.Height = this.aTarget.mDropZone(this).Height;
+            pTarget.mOnDropEvent(this);
         }
         else
         {
@@ -80,7 +81,6 @@ export class DragDropEvent
             this.aMouseFocusable.Width = this.aWidth;
             this.aMouseFocusable.Height = this.aHeight;
         }
-        this.aMouseFocusable.Draged = false;
     }
 }
 

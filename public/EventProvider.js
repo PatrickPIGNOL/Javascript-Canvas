@@ -292,6 +292,27 @@ class EventProvider
             }
         );
     }
+
+    mOnDropEvent(pEvent)
+    {
+        this.aOnDropEventListeners.forEach
+        (
+            vOnDropEventListener=>
+            {
+                if(vOnDropEventListener)
+                {
+                    if(vOnDropEventListener === this)
+                    {
+                        vOnDropEventListener.mOnDropEventHandler(pEvent);
+                    }
+                    else
+                    {
+                        vOnDropEventListener.mOnDropEvent(pEvent);
+                    }
+                }
+            }
+        );
+    }
     
     mOnKeyDownEvent        (pEvent)
     { 
@@ -701,6 +722,7 @@ class EventProvider
             this.mAddOnDragEventListener        (pEventListener);
             this.mAddOnDragMoveEventListener    (pEventListener);
             this.mAddOnDragDropEventListener    (pEventListener);
+            this.mAddOnDropEventListener        (pEventListener);
             this.mAddOnKeyDownEventListener     (pEventListener);
             this.mAddOnKeyUpEventListener       (pEventListener);
             this.mAddOnMouseDownEventListener   (pEventListener);
@@ -780,6 +802,18 @@ class EventProvider
         if(pEventListener)
         {
             return this.aOnDragDropEventListeners.push(pEventListener);
+        }
+        else
+        {
+            throw new Error("Observer provided is null or undefined.");
+        }
+    }
+
+    mAddOnDropEventListener(pEventListener)
+    {
+        if(pEventListener)
+        {
+            return this.aOnDropEventListeners.push(pEventListener);
         }
         else
         {

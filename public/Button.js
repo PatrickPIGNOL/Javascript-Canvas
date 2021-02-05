@@ -1,6 +1,6 @@
-import {GraphicComponent} from "./GraphicComponent.mjs";
-import {Loader, EImage, EFonts} from "./Loader.mjs";
-import {MouseFocusable} from "./MouseFocusable.mjs";
+import {GraphicComponent} from "./GraphicComponent.js";
+import {Loader, EImage, EFonts} from "./Loader.js";
+import {MouseFocusable} from "./MouseFocusable.js";
 
 /*
 const EButtonStates = Object.freeze

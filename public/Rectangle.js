@@ -1,4 +1,4 @@
-class Rectangle
+export class Rectangle
 {
     constructor(pX, pY, pWidth, pHeight)
     {
@@ -28,3 +28,5 @@ class Rectangle
         return this.aHeight;
     }
 }
+
+export default {Rectangle}

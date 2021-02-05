@@ -1,8 +1,8 @@
-import {Scene} from "./Scene.mjs";
-import {Mouse} from "./Mouse.mjs";
-import {Loader, EImage} from "./Loader.mjs";
-import {GameEngine} from "./GameEngine.mjs";
-import {MainMenuScene} from "./MainMenuScene.mjs";
+import {Scene} from "./Scene.js";
+import {Mouse} from "./Mouse.js";
+import {Loader, EImage} from "./Loader.js";
+import {GameEngine} from "./GameEngine.js";
+import {MainMenuScene} from "./MainMenuScene.js";
 const IntroStatus = Object.freeze
 (
     {

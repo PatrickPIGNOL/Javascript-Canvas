@@ -1,5 +1,5 @@
-import {Button} from "./Button.mjs";
-import {EFonts} from "./Loader.mjs"
+import {Button} from "./Button.js";
+import {EFonts} from "./Loader.js"
 
 const EMainMenuBoutonStatus = Object.freeze
 (
@@ -22,8 +22,7 @@ class MainMenuButton extends Button
         this.Visible = false;
         this.aState = EMainMenuBoutonStatus.FadeIn;
         this.aTimer = 0;
-        this.GlobalAlpha = 0;      
-        this.Dragable = true;  
+        this.GlobalAlpha = 0;    
     }
 
     mShow()

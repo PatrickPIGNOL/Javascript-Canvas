@@ -1,5 +1,5 @@
-import {MouseFocusable} from "./MouseFocusable.mjs";
-import {Loader, EImage} from "./Loader.mjs";
+import {MouseFocusable} from "./MouseFocusable.js";
+import {Loader, EImage} from "./Loader.js";
 
 const WindowState = Object.freeze
 (
