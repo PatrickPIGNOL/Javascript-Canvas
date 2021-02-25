@@ -29,42 +29,19 @@ const WindowState = Object.freeze
 
 class MainMenuWindow extends WindowBase
 {
-    constructor(pParent, pX, pY, pWidth, pHeight)
+    constructor(pParent, pX, pY, pWidth, pHeight, pText)
     {
         super(pParent, pX, pY, pWidth, pHeight);
+		this.aText = pText;
         this.aMaxWidth = this.Width;
         this.aMaxHeight = this.Height;
-        this.aLanguagesButton = new MainMenuButton(this, 10, 80, 180, 40,   " Languages");
-        this.aLanguagesButton.mOnClickEventHandler = function (pEvent)
-            {
-                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
-                {
-                    this.TextColor = "rgba(0, 255, 0, 1.0)";
-                }
-                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
-                {
-                    this.TextColor = "rgba(231, 212, 184, 1.0)";
-                }
-            };
         this.aNewGameButton = new MainMenuButton(this, 10, 130, 180, 40,    " New Game ");
         this.aNewGameButton.mOnClickEventHandler = function (pEvent)
             {
-				alert("clicked")
+       			this.Parent.mVisible(false);
                 GameEngine.Instance.mChangeScene(LevelScene.Instance);
             };
-        this.aLoadButton = new MainMenuButton(this, 10, 180, 180, 40,       "      Load ");
-        this.aLoadButton.mOnClickEventHandler = function (pEvent)
-            {
-                if(this.TextColor === "rgba(231, 212, 184, 1.0)")
-                {
-                    this.TextColor = "rgba(0, 255, 0, 1.0)";
-                }
-                else if(this.TextColor === "rgba(0, 255, 0, 1.0)")
-                {
-                    this.TextColor = "rgba(231, 212, 184, 1.0)";
-                }
-            };
-        this.aOptionsButton = new MainMenuButton(this, 10, 230, 180, 40,       "   Options ");
+        this.aOptionsButton = new MainMenuButton(this, 10, 180, 180, 40,       "   Scores ");
 		this.aOptionsButton.mOnClickEventHandler = function (pEvent)
             {
                 if(this.TextColor === "rgba(231, 212, 184, 1.0)")
@@ -76,7 +53,7 @@ class MainMenuWindow extends WindowBase
                     this.TextColor = "rgba(231, 212, 184, 1.0)";
                 }
             };
-        this.aCreditsButton = new MainMenuButton(this, 10, 280, 180, 40,       "   Crédits ");
+        this.aCreditsButton = new MainMenuButton(this, 10, 230, 180, 40,       "   Crédits ");
 		this.aCreditsButton.mOnClickEventHandler = function (pEvent)
             {
                 if(this.TextColor === "rgba(231, 212, 184, 1.0)")
@@ -93,6 +70,18 @@ class MainMenuWindow extends WindowBase
         this.aState = WindowState.Closed
     }
     
+	mVisible(pVisible)
+	{
+		this.Visible = pVisible;
+		this.Components.forEach
+		(
+			vComponentFound=>
+			{
+				vComponentFound.Visible = pVisible;
+			}
+		);
+	}
+
     mOnDropEventHandler(pEvent)
     {
         pEvent.MouseFocusable.Parent.mRemoveComponent(pEvent.MouseFocusable);
@@ -295,10 +284,24 @@ class MainMenuWindow extends WindowBase
             
             //---------
 
-            pGraphicContext.drawImage(Loader.Images[EImage.CornerNW.Index], this.AbsoluteX, this.AbsoluteY);
+			
+
+			pGraphicContext.drawImage(Loader.Images[EImage.CornerNW.Index], this.AbsoluteX, this.AbsoluteY);
             pGraphicContext.drawImage(Loader.Images[EImage.CornerNE.Index], this.AbsoluteX + this.Width - 8, this.AbsoluteY);
             pGraphicContext.drawImage(Loader.Images[EImage.CornerSE.Index], this.AbsoluteX + this.Width - 8, this.AbsoluteY + this.Height - 8);
             pGraphicContext.drawImage(Loader.Images[EImage.CornerSW.Index], this.AbsoluteX, this.AbsoluteY + this.Height - 8);
+
+			//----------
+/*
+			pGraphicContext.save();
+            pGraphicContext.font = this.TextSize + ' ' + this.aFont.Name;
+            pGraphicContext.beginPath();
+            pGraphicContext.rect(this.AbsoluteX, this.AbsoluteY, this.Width, this.Height);
+            pGraphicContext.clip();
+
+            pGraphicContext.fillText(this.aText, this.AbsoluteX, this.AbsoluteY + this.Height-10);
+            pGraphicContext.restore();
+*/
             pGraphicContext.globalAlpha = 1;
         }
     }

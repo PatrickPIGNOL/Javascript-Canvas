@@ -135,13 +135,6 @@ export class Button extends MouseFocusable
             pGraphicContext.globalAlpha = 1;
         }
     }
-    /*
-    mOnMouseMoveEventHandler(pEvent)
-    {
-        super.mOnMouseMoveEventHandler(pEvent);
-        console.log("Button mOnMouseMoveEventHandler");
-    }
-    */
 }
 
 

@@ -36,7 +36,7 @@ class MainMenuScene extends Scene
         this.aMouse = null;
         this.aTimer = 0;
         this.aStatus = EMainMenuStatus.Closed;
-        this.aMainMenuWindow = new MainMenuWindow(this, 0, 0, 200, 400);
+        this.aMainMenuWindow = new MainMenuWindow(this, 0, 0, 200, 280);
         this.mAddOnUpdateEventListener(this.aMainMenuWindow);
         this.mAddOnDrawEventListener(this.aMainMenuWindow);
         this.aMouse = Mouse.Instance;
@@ -113,10 +113,6 @@ class MainMenuScene extends Scene
         pGraphicContext.fillStyle = pGraphicContext.createPattern(Loader.Images[EImage.MenuBackGround.Index], "repeat");
         pGraphicContext.fillRect(0, 0, pCanvas.width, pCanvas.height);
         
-		if(this.DragDropEvent)
-		{
-			this.DragDropEvent.MouseFocusable.mOnDrawEvent(pCanvas, pGraphicContext);
-		}
         pGraphicContext.globalAlpha = 1;
     }
 }

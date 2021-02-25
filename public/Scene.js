@@ -1,6 +1,6 @@
 
 import {MouseFocusable} from "./MouseFocusable.js";
-class Scene extends MouseFocusable
+export class Scene extends MouseFocusable
 {
     constructor()
     {
@@ -10,10 +10,11 @@ class Scene extends MouseFocusable
     }
     mOnUpdateEventHandler(pCanvas, pDeltaTime)
     {
-        this.Width = pCanvas.width;
+		this.X = 0;
+		this.Y = 0;
+		this.Width = pCanvas.width;
         this.Height = pCanvas.height;
     }
 }
 
-export {Scene};
 export default {Scene};

@@ -2,6 +2,7 @@
 
 import {GameEngine} from "./GameEngine.js";
 import {IntroScene} from "./IntroScene.js";
+import {LevelScene} from "./LevelScene.js";
 
 export const EBrowsers = Object.freeze
 (
@@ -21,11 +22,17 @@ export const EBrowsers = Object.freeze
 export class Loader
 {
     static aImages = new Array();
+	static aSounds = new Array();
     static aFonts = new Array();
     constructor()
     {
 
     }
+
+	static get Sounds()
+	{
+		return Loader.aSounds;
+	}
 
     static get Fonts()
     {
@@ -36,6 +43,40 @@ export class Loader
     {
         return Loader.aImages;
     }
+
+	static mLoadSounds(pSoundsFiles, pCallBack)
+	{		
+		if(pSoundsFiles && pSoundsFiles.length > 0)
+		{
+			this.Sounds.push(new Audio(pSoundsFiles.shift()));
+			if(pSoundsFiles.length === 0)
+			{
+				myAudioElement.addEventListener
+				(
+					"canplaythrough", 
+					event => 
+					{
+						if(pCallBack)
+						{
+							pCallBack
+						}
+					}
+				);
+			}
+			else
+			{
+				myAudioElement.addEventListener
+				(
+					"canplaythrough", 
+					event => 
+					{
+						mLoadSounds(pSoundsFiles, pCallBack);
+					}
+				);
+			}
+		}
+	}
+	
 
     static mFromImageEnum(pImagesFilesEnum)
     {
@@ -251,7 +292,7 @@ export const EImage = Object.freeze
         },
         SpriteSheet:
         {
-            Index: 19,
+            Index: 20,
             FileName: "./Images/SpriteSheet.png"
         }
     }

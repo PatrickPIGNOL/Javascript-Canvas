@@ -103,11 +103,7 @@ class MouseFocusable extends GraphicComponent
     mRemoveComponent(pComponent)
     {
         let vIndex = this.aComponents.indexOf(pComponent);
-        while(vIndex > -1)
-        {
-            this.aComponents.splice(vIndex, 1);
-            vIndex = this.aComponents.indexOf(pComponent);
-        }
+        this.aComponents.splice(vIndex, 1);
     }
 
     get Parent()
@@ -211,6 +207,7 @@ class MouseFocusable extends GraphicComponent
 
     mOnClickEventHandler(pEvent)
     {
+        this.aMouseFocus = this.mUpdateMouseFocus(pEvent);
         super.mOnClickEventHandler(pEvent);
         if(this.MouseFocus && (this.MouseFocus !== this))
         {

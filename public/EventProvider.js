@@ -7,7 +7,6 @@ class EventProvider
         this.aOnDragEventListeners = new Array();
         this.aOnDragMoveEventListeners = new Array();
         this.aOnDragDropEventListeners = new Array();
-        this.aOnDropEventListeners = new Array();
         this.aOnKeyDownEventListeners = new Array();
         this.aOnKeyUpEventListeners = new Array();
         this.aOnMouseDownEventListeners = new Array();
@@ -33,47 +32,34 @@ class EventProvider
 
     mOnClickEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnDoubleClickEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;        
     }
 
     mOnDragEventHandler(pEvent)
     {
-        return false;
     }
 
     mOnDragMoveEventHandler(pEvent)
     {
-        return false;
     }
 
     mOnDragDropEventHandler(pEvent)
     {
-        return false;
     }
 
     mOnKeyDownEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnKeyUpEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnMouseDownEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnMouseEnterEventHandler(pEvent)
@@ -108,38 +94,26 @@ class EventProvider
 
     mOnMouseUpEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
     
     mOnTouchCancelEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnTouchEndEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
     
     mOnTouchLeaveEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnTouchMoveEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnTouchStartEventHandler(pEvent)
     {
-        pEvent.preventDefault();
-        return false;
     }
 
     mOnLoadEventHandler()
@@ -722,7 +696,6 @@ class EventProvider
             this.mAddOnDragEventListener        (pEventListener);
             this.mAddOnDragMoveEventListener    (pEventListener);
             this.mAddOnDragDropEventListener    (pEventListener);
-            this.mAddOnDropEventListener        (pEventListener);
             this.mAddOnKeyDownEventListener     (pEventListener);
             this.mAddOnKeyUpEventListener       (pEventListener);
             this.mAddOnMouseDownEventListener   (pEventListener);
@@ -749,6 +722,37 @@ class EventProvider
         }
     }
 
+	mRemoveOnAllEventListener(pEventListener)
+	{
+		if(pEventListener)
+        {
+            this.mRemoveOnClickEventListener       (pEventListener);
+            this.mRemoveOnDoubleClickEventListener (pEventListener);
+            this.mRemoveOnDragEventListener        (pEventListener);
+            this.mRemoveOnDragMoveEventListener    (pEventListener);
+            this.mRemoveOnDragDropEventListener    (pEventListener);
+            this.mRemoveOnKeyDownEventListener     (pEventListener);
+            this.mRemoveOnKeyUpEventListener       (pEventListener);
+            this.mRemoveOnMouseDownEventListener   (pEventListener);
+            this.mRemoveOnMouseEnterEventListener  (pEventListener);
+            this.mRemoveOnMouseLeaveEventListener  (pEventListener);
+            this.mRemoveOnMouseMoveEventListener   (pEventListener);
+            this.mRemoveOnMouseOutEventListener    (pEventListener);
+            this.mRemoveOnMouseOverEventListener   (pEventListener);
+            this.mRemoveOnMouseUpEventListener     (pEventListener);
+            this.mRemoveOnTouchCancelEventListener (pEventListener);
+            this.mRemoveOnTouchEndEventListener    (pEventListener);
+            this.mRemoveOnTouchLeaveEventListener  (pEventListener);
+            this.mRemoveOnTouchMoveEventListener   (pEventListener);
+            this.mRemoveOnTouchStartEventListener  (pEventListener);
+            this.mRemoveOnLoadEventListener        (pEventListener);
+            this.mRemoveOnUnLoadEventListener      (pEventListener);
+            this.mRemoveOnUpdateEventListener      (pEventListener);
+            this.mRemoveOnDrawEventListener        (pEventListener);
+            this.mRemoveOnResizeEventListener      (pEventListener);
+        }
+	}
+
     mAddOnClickEventListener(pEventListener)
     {
         if(pEventListener)
@@ -760,6 +764,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnClickEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnClickEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnClickEventListeners[vIndex])
+			{
+				this.aOnClickEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnDoubleClickEventListener(pEventListener)
     {
@@ -773,6 +788,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnDoubleClickEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnDoubleClickEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnDoubleClickEventListeners[vIndex])
+			{
+				this.aOnDoubleClickEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnDragEventListener(pEventListener)
     {
         if(pEventListener)
@@ -784,6 +810,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnDragEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnDragEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnDragEventListeners[vIndex])
+			{
+				this.aOnDragEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnDragMoveEventListener(pEventListener)
     {
@@ -797,6 +834,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnDragMoveEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnDragMoveEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnDragMoveEventListeners[vIndex])
+			{
+				this.aOnDragMoveEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnDragDropEventListener(pEventListener)
     {
         if(pEventListener)
@@ -808,6 +856,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnDragDropEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnDragDropEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnDragDropEventListeners[vIndex])
+			{
+				this.aOnDragDropEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnDropEventListener(pEventListener)
     {
@@ -821,6 +880,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnKeyDownEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnKeyDownEventListeners[vIndex])
+			{
+				this.aOnKeyDownEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnKeyDownEventListener(pEventListener)
     {
         if(pEventListener)
@@ -832,6 +902,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnKeyDownEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnKeyDownEventListeners[vIndex])
+			{
+				this.aOnKeyDownEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnKeyUpEventListener(pEventListener)
     {
@@ -845,6 +926,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnKeyUpEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnKeyUpEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnKeyUpEventListeners[vIndex])
+			{
+				this.aOnKeyUpEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnMouseDownEventListener(pEventListener)
     {
         if(pEventListener)
@@ -856,6 +948,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnMouseDownEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseDownEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseDownEventListeners[vIndex])
+			{
+				this.aOnMouseDownEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnMouseEnterEventListener(pEventListener)
     {
@@ -869,6 +972,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnMouseEnterEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseEnterEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseEnterEventListeners[vIndex])
+			{
+				this.aOnMouseEnterEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnMouseLeaveEventListener(pEventListener)
     {
         if(pEventListener)
@@ -880,6 +994,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnMouseLeaveEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseLeaveEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseLeaveEventListeners[vIndex])
+			{
+				this.aOnMouseLeaveEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnMouseMoveEventListener(pEventListener)
     {
@@ -893,6 +1018,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnMouseMoveEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseMoveEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseMoveEventListeners[vIndex])
+			{
+				this.aOnMouseMoveEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnMouseOutEventListener(pEventListener)
     {
         if(pEventListener)
@@ -904,6 +1040,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnMouseOutEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseOutEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseOutEventListeners[vIndex])
+			{
+				this.aOnMouseOutEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnMouseOverEventListener(pEventListener)
     {
@@ -917,6 +1064,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnMouseOverEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseOverEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseOverEventListeners[vIndex])
+			{
+				this.aOnMouseOverEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnMouseUpEventListener(pEventListener)
     {
         if(pEventListener)
@@ -928,6 +1086,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnMouseUpEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnMouseUpEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnMouseUpEventListeners[vIndex])
+			{
+				this.aOnMouseUpEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnTouchCancelEventListener(pEventListener)
     {
@@ -941,6 +1110,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnTouchCancelEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnTouchCancelEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnTouchCancelEventListeners[vIndex])
+			{
+				this.aOnTouchCancelEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnTouchEndEventListener(pEventListener)
     {
         if(pEventListener)
@@ -952,6 +1132,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnTouchEndEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnTouchEndEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnTouchEndEventListeners[vIndex])
+			{
+				this.aOnTouchEndEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnTouchLeaveEventListener(pEventListener)
     {
@@ -965,6 +1156,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnTouchLeaveEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnTouchLeaveEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnTouchLeaveEventListeners[vIndex])
+			{
+				this.aOnTouchLeaveEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnTouchMoveEventListener(pEventListener)
     {
         if(pEventListener)
@@ -977,6 +1179,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnTouchMoveEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnTouchMoveEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnTouchMoveEventListeners[vIndex])
+			{
+				this.aOnTouchMoveEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnTouchStartEventListener(pEventListener)
     {
         if(pEventListener)
@@ -988,6 +1201,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnTouchStartEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnTouchStartEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnTouchStartEventListeners[vIndex])
+			{
+				this.aOnTouchStartEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
     
     mAddOnLoadEventListener(pEventListener)
     {
@@ -1000,6 +1224,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnLoadEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnLoadEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnLoadEventListeners[vIndex])
+			{
+				this.aOnLoadEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
     
     mAddOnUnLoadEventListener(pEventListener)
     {
@@ -1013,6 +1248,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnUnLoadEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnUnLoadEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnUnLoadEventListeners[vIndex])
+			{
+				this.aOnUnLoadEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnUpdateEventListener(pEventListener)
     {
         if(pEventListener)
@@ -1024,6 +1270,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnUpdateEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnUpdateEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnUpdateEventListeners[vIndex])
+			{
+				this.aOnUpdateEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 
     mAddOnDrawEventListener(pEventListener)
     {
@@ -1037,6 +1294,17 @@ class EventProvider
         }
     }
 
+	mRemoveOnDrawEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnDrawEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnDrawEventListeners[vIndex])
+			{
+				this.aOnDrawEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
     mAddOnResizeEventListener(pEventListener)
     {
         if(pEventListener)
@@ -1048,6 +1316,17 @@ class EventProvider
             throw new Error("Observer provided is null or undefined.");
         }
     }
+
+	mRemoveOnResizeEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnResizeEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnResizeEventListeners[vIndex])
+			{
+				this.aOnResizeEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
 }
 
 export {EventProvider};
