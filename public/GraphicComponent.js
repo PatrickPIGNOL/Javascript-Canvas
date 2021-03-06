@@ -994,7 +994,7 @@ class GraphicComponent
     {
         if(pEventListener)
         {
-            return this.aOnKeyDownEventListeners.push(pEventListener);
+            return this.aOnEnableEventListeners.push(pEventListener);
         }
         else
         {
@@ -1004,11 +1004,11 @@ class GraphicComponent
 
 	mRemoveEnableEventListener(pEventListener)
 	{
-		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
+		for(let vIndex = this.aOnEnableEventListeners.length - 1; vIndex >= 0; vIndex--)
 		{
-			if(pEventListener === this.aOnKeyDownEventListeners[vIndex])
+			if(pEventListener === this.aOnEnableEventListeners[vIndex])
 			{
-				this.aOnKeyDownEventListeners.splice(vIndex, 1);
+				this.aOnEnableEventListeners.splice(vIndex, 1);
 			}
 		}
 	}
