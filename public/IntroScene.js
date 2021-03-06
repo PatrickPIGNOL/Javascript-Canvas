@@ -81,7 +81,7 @@ class IntroScene extends Scene
                 if(this.aTimer > 3000)
                 {
                     this.aTimer = 0;
-                    GameEngine.Instance.mChangeScene(MainMenuScene.Instance);
+                    GameEngine.Instance.mChangeScene(IntroScene.Instance);
                 }
             }break;
         }

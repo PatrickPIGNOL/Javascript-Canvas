@@ -2,7 +2,6 @@
 
 import {GameEngine} from "./GameEngine.js";
 import {IntroScene} from "./IntroScene.js";
-import {LevelScene} from "./LevelScene.js";
 
 export const EBrowsers = Object.freeze
 (
