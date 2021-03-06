@@ -1,4 +1,4 @@
-class Component
+export class Component
 {
     constructor()
     {
@@ -1316,5 +1316,4 @@ class Component
 	}
 }
 
-export {EventProvider};
-export default {EventProvider};
+export default {Component};
