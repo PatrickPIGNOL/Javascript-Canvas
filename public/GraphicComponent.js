@@ -956,18 +956,6 @@ class GraphicComponent
 		}
 	}
 
-    mAddOnDropEventListener(pEventListener)
-    {
-        if(pEventListener)
-        {
-            return this.aOnDropEventListeners.push(pEventListener);
-        }
-        else
-        {
-            throw new Error("Observer provided is null or undefined.");
-        }
-    }
-
 	mRemoveOnKeyDownEventListener(pEventListener)
 	{
 		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
@@ -992,6 +980,29 @@ class GraphicComponent
     }
 
 	mRemoveOnKeyDownEventListener(pEventListener)
+	{
+		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
+		{
+			if(pEventListener === this.aOnKeyDownEventListeners[vIndex])
+			{
+				this.aOnKeyDownEventListeners.splice(vIndex, 1);
+			}
+		}
+	}
+
+    mAddOnEnableEventListener(pEventListener)
+    {
+        if(pEventListener)
+        {
+            return this.aOnKeyDownEventListeners.push(pEventListener);
+        }
+        else
+        {
+            throw new Error("Observer provided is null or undefined.");
+        }
+    }
+
+	mRemoveEnableEventListener(pEventListener)
 	{
 		for(let vIndex = this.aOnKeyDownEventListeners.length - 1; vIndex >= 0; vIndex--)
 		{
