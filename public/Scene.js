@@ -1,6 +1,6 @@
 
-import {MouseFocusable} from "./MouseFocusable.js";
-export class Scene extends MouseFocusable
+import {KeyboardFocusable} from "./KeyboardFocusable.js";
+export class Scene extends KeyboardFocusable
 {
     constructor()
     {
