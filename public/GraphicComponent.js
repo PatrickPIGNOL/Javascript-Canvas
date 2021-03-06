@@ -1,5 +1,3 @@
-import Component from "./Component";
-
 import Component from "./Component.js"
 
 export class GraphicComponent extends Component
