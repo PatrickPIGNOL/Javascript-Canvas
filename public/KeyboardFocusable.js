@@ -1,66 +1,44 @@
-import {GraphicComponent} from "./GraphicComponent.js";
+import {MouseFocusable} from "./MouseFocusable.js";
+import {EKeyCodes} from "./EKeyCode.js"
 
-export class KeyboardFocusable extends GraphicComponent
+export class KeyboardFocusable extends MouseFocusable
 {
     constructor(pParent, pX, pY, pWidth, pHeight)
     {
         super(pParent, pX, pY, pWidth, pHeight)
+        this.aKeyboardFocusLoop = new Array();
         this.aKeyboardFocusIndex = -1;
         this.aKeyboardFocusable = false;
-        this.aKeyboardFocus = null;
-        this.aKeyboardFocusDefault = false;
-        this.mNextKeyboardFocus();
+        this.mInit();
+    }
+
+    mInit()
+    {
+        for(let vIndex = 0; vIndex < this.Components.lenght, vIndex++)
+        {
+            const vComponentFound = this.Components[vIndex];
+            if(vComponentFound.KeyboardFocusable)
+            {
+                if(this.aKeyboardFocusIndex < 0)
+                {
+                    this.aKeyboardFocusIndex = vIndex;
+                }
+                this.aKeyboardFocusLoop.push(this.Components[vIndex])
+            }
+        }
+    }
+
+    mOnKeyUpEventHandler(pEvent)
+    {
+        if(pEvent.code === EKeyCodes.Tab)
+        {
+            this.mNextKeyboardFocus(pEvent  );
+        }
     }
 
     mNextKeyboardFocus()
     {
-        if
-        (
-            this.aVisible
-            &&
-            this.aEnabled
-            &&
-            this.aKeyboardFocusable
-        )
-        {
-            if(!this.aKeyboardFocus)
-            if(this.aKeyboardFocusDefault)
-            {
-                return this.aKeyboardFocused = this;
-            }
-            else
-            {
-                for(let vIndex = 0; vIndex < this.Components.lenght; vIndex++)
-                {
-                    const vComponentFound = this.Components[vIndex];
-                    if(this.aKeyboardFocus = vComponentFound.mNextKeyboardFocus())
-                    {
-                        return this.aKeyboardFocus;
-                    }
-                }
-            }
-        }
-        else if
-        (
-            this.aVisible
-            &&
-            this.aEnabled
-            &&
-            this.aKeyboardFocusable
-            &&
-            this.aKeyboardFocused
-        )
-        {
-            for(let vIndex = 0; vIndex < this.Components.lenght; vIndex++)
-            {
-                const vComponentFound = this.Components[vIndex];
-                if(this.aKeyboardFocus = vComponentFound.mNextKeyboardFocus())
-                {
-                    return this.aKeyboardFocus;
-                }
-            }
-            if(this.aKeyboardFocusable)
-        }
+        
     }
 }
 
