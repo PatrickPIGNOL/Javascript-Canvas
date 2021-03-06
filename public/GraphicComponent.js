@@ -4,6 +4,7 @@ export class GraphicComponent extends Component
 {
     constructor()
     {
+        super();
 		this.aEnabled = true;
         this.aGlobalAlpha = 1; 
         this.aVisible = true;
