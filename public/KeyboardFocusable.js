@@ -14,16 +14,6 @@ export class KeyboardFocusable extends MouseFocusable
 		this.mListKeyboardFocusable();
     }
 
-	mOnKeyboardFocusEventHandler(pFocused)
-	{
-
-	}
-
-	mAddOnKeyboardFocusEventListener(pOnKeyboardFocusEventListener)
-	{
-
-	}
-
 	get KeyboardFocusable()
 	{
 		return this.aKeyboardFocusable;
@@ -46,6 +36,49 @@ export class KeyboardFocusable extends MouseFocusable
 			return null;
 		}
 	}
+
+	mOnKeyboardFocusEventHandler(pFocused)
+	{
+
+	}
+
+	mAddOnKeyboardFocusEventListener(pOnKeyboardFocusEventListener)
+	{
+		if(pOnKeyboardFocusEventListener)
+		{
+			this.aOnKeyboardFocusEventListeners.push(pOnKeyboardFocusEventListener);
+		}
+	}
+
+	mRemoveOnKeyboardFocusEventListener(pOnKeyboardFocusEventListener)
+	{
+		let vIndex;
+		while((vIndex = this.aOnKeyboardFocusEventListeners.lastIndexOf(pOnKeyboardFocusEventListener)) > -1)
+		{
+			this.aOnKeyboardFocusEventListeners.splice(vIndex, 1);
+		}
+	}
+
+    mOnKeyboardFocusEvent(pFocused)
+    {
+        this.aOnKeyboardFocusEventListeners.forEach
+        (
+            vOnKeyboardFocusEventListener=>
+            {
+                if(vOnKeyboardFocusEventListener)
+                {
+                    if(vOnKeyboardFocusEventListener === this)
+                    {
+                        vOnKeyboardFocusEventListener.mOnKeyboardFocusEventHandler(pFocused);    
+                    }
+                    else
+                    {
+                        vOnResizeEventListener.mOnKeyboardFocusEvent(pFocused);
+                    }
+                }
+            }
+        );
+    }
 
 	mListKeyboardFocusable()
 	{
