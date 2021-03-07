@@ -14,7 +14,7 @@ export class KeyboardFocusable extends MouseFocusable
 
     mInit()
     {
-        for(let vIndex = 0; vIndex < this.Components.lenght, vIndex++)
+        for(let vIndex = 0; vIndex < this.Components.lenght; vIndex++)
         {
             const vComponentFound = this.Components[vIndex];
             if(vComponentFound.KeyboardFocusable)
@@ -40,7 +40,7 @@ export class KeyboardFocusable extends MouseFocusable
     {
         if(pEvent.code === EKeyCodes.Tab)
 		{
-			
+
 		}
     }
 }

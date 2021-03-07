@@ -1,5 +1,6 @@
 export const EKeyCode = Object.freeze
 (		
+	{
         Backspace:		8,
         Tab:			9,
         Enter:			13,
