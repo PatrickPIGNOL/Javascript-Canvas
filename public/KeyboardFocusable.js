@@ -10,7 +10,6 @@ export class KeyboardFocusable extends MouseFocusable
         this.aKeyboardFocusIndex = -1;
         this.aKeyboardFocusable = false;
 		this.aOnKeyboardFocusEventListeners = new Array();
-		this.mAddOnKeyboardFocusEventListener(this);
 		this.mListKeyboardFocusable();
     }
 
