@@ -9,6 +9,7 @@ export class KeyboardFocusable extends MouseFocusable
         this.aKeyboardFocusLoop = new Array();
         this.aKeyboardFocusIndex = -1;
         this.aKeyboardFocusable = false;
+		this.aKeyboardFocus = false;
 		this.aOnKeyboardFocusEventListeners = new Array();
 		this.mListKeyboardFocusable();
     }
@@ -16,6 +17,16 @@ export class KeyboardFocusable extends MouseFocusable
 	get KeyboardFocusable()
 	{
 		return this.aKeyboardFocusable;
+	}
+
+	get KeyboardFocus()
+	{
+		return this.aKeyboardFocus;
+	}
+
+	set KeyboardFocus(pFocused)
+	{
+		this.aKeyboardFocus = pFocused;
 	}
 
 	get KeyboardFocused()
@@ -38,7 +49,7 @@ export class KeyboardFocusable extends MouseFocusable
 
 	mOnKeyboardFocusEventHandler(pFocused)
 	{
-
+		this.KeyboardFocus(pFocused);
 	}
 
 	mAddOnKeyboardFocusEventListener(pOnKeyboardFocusEventListener)
@@ -58,7 +69,6 @@ export class KeyboardFocusable extends MouseFocusable
 		}
 	}
 
-	/*
 	mAddOnAllEventListener(pEventListener)
     {
 		super.mAddOnAllEventListener(pEventListener);
@@ -70,8 +80,7 @@ export class KeyboardFocusable extends MouseFocusable
 		super.mRemoveOnAllEventListener(pEventListener);
 		this.mRemoveOnKeyboardFocusEventListener(pEventListener);
 	}
-	*/
-	
+
     mOnKeyboardFocusEvent(pFocused)
     {
         this.aOnKeyboardFocusEventListeners.forEach
@@ -125,6 +134,7 @@ export class KeyboardFocusable extends MouseFocusable
         }
 		if(this.aKeyboardFocusLoop.lenght < 1)
 		{
+			this.KeyboardFocused.mOnKeyboardFocusEvent(false);
 			this.aKeyboardFocusIndex = -1;
 		}
 	}

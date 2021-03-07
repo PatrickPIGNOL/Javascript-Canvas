@@ -26,7 +26,6 @@ export class Component
         this.aOnResizeEventListeners = new Array();
         this.aOnUnLoadEventListeners = new Array();
         this.aOnUpdateEventListeners = new Array();
-        this.mAddOnAllEventListener(this);
     }
 
     mOnClickEventHandler(pEvent)
