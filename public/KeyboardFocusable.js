@@ -58,6 +58,7 @@ export class KeyboardFocusable extends MouseFocusable
 		}
 	}
 
+	/*
 	mAddOnAllEventListener(pEventListener)
     {
 		super.mAddOnAllEventListener(pEventListener);
@@ -69,7 +70,8 @@ export class KeyboardFocusable extends MouseFocusable
 		super.mRemoveOnAllEventListener(pEventListener);
 		this.mRemoveOnKeyboardFocusEventListener(pEventListener);
 	}
-
+	*/
+	
     mOnKeyboardFocusEvent(pFocused)
     {
         this.aOnKeyboardFocusEventListeners.forEach
