@@ -59,6 +59,18 @@ export class KeyboardFocusable extends MouseFocusable
 		}
 	}
 
+	mAddOnAllEventListener(pEventListener)
+    {
+		super.mAddOnAllEventListener(pEventListener);
+		this.mAddOnKeyboardFocusEventListener(pEventListener);
+	}
+
+	mRemoveOnAllEventListener(pEventListener)
+	{
+		super.mRemoveOnAllEventListener(pEventListener);
+		this.mRemoveOnKeyboardFocusEventListener(pEventListener);
+	}
+
     mOnKeyboardFocusEvent(pFocused)
     {
         this.aOnKeyboardFocusEventListeners.forEach
@@ -104,6 +116,7 @@ export class KeyboardFocusable extends MouseFocusable
 					if(this.aKeyboardFocusIndex < 0)
 					{
 						this.aKeyboardFocusIndex = vKeyboardFocusableIndex;
+						vComponentFound.mOnKeyboardFocusEvent(true);
 					}
 					this.aKeyboardFocusLoop.push(this.Components[vIndex]);
             	}
@@ -128,52 +141,44 @@ export class KeyboardFocusable extends MouseFocusable
         if(pEvent.code === EKeyCodes.Tab)
 		{
 			this.mListKeyboardFocusable();
-			let vKeyboardFocused;
-			if(pEvent.shiftKey)
-			{
-				while
+			let vKeyboardFocused = this.KeyboardFocused;			
+			while
+			(
+				this.aKeyboardFocusLoop.lenght > 0
+				&&
 				(
-					this.aKeyboardFocusLoop.lenght > 0
-					&&
-					(
-						vKeyboardFocused.KeyboardFocusable 
-						&& 
-						vKeyboardFocused.Visible 
-						&& 
-						vKeyboardFocused.Enabled
-					)
+					vKeyboardFocused.KeyboardFocusable 
+					&& 
+					vKeyboardFocused.Visible 
+					&& 
+					vKeyboardFocused.Enabled
 				)
+			)
+			{
+				if(this.KeyboardFocused)
+				{
+					this.KeyboardFocused.mOnKeyboardFocusEvent(false);
+				}
+				if(pEvent.shiftKey)
 				{
 					this.aKeyboardFocusIndex--;
 					if(this.aKeyboardFocusIndex < 0)
 					{
 						this.aKeyboardFocusIndex = this.aKeyboardFocusLoop.lenght - 1;
 					}
-					vKeyboardFocused = this.KeyboardFocused;
 				}
-			}
-			else
-			{
-				let vKeyboardFocused;
-				while
-				(
-					this.aKeyboardFocusLoop.lenght > 0
-					&&
-					(
-						vKeyboardFocused.KeyboardFocusable 
-						&& 
-						vKeyboardFocused.Visible 
-						&& 
-						vKeyboardFocused.Enabled
-					)
-				)
+				else
 				{
 					this.aKeyboardFocusIndex++;
 					if(this.aKeyboardFocusIndex > this.aKeyboardFocusLoop.lenght - 1)
 					{
 						this.aKeyboardFocusIndex = 0;
 					}
-					vKeyboardFocused = this.KeyboardFocused;
+				}
+				vKeyboardFocused = this.KeyboardFocused;
+				if(this.KeyboardFocused)
+				{
+					this.KeyboardFocused.mOnKeyboardFocusEvent(true);
 				}
 			}
 		}
