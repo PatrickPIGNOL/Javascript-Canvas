@@ -32,13 +32,16 @@ export class KeyboardFocusable extends MouseFocusable
     {
         if(pEvent.code === EKeyCodes.Tab)
         {
-            this.mNextKeyboardFocus(pEvent  );
+            this.mNextKeyboardFocus(pEvent);
         }
     }
 
-    mNextKeyboardFocus()
+    mNextKeyboardFocus(pEvent)
     {
-        
+        if(pEvent.code === EKeyCodes.Tab)
+		{
+			
+		}
     }
 }
 
