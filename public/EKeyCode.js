@@ -1,4 +1,4 @@
-export const EKeyCode = Object.freeze
+export const EKeyCodes = Object.freeze
 (		
 	{
         Backspace:		8,
