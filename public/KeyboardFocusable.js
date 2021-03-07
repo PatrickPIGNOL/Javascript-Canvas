@@ -9,38 +9,140 @@ export class KeyboardFocusable extends MouseFocusable
         this.aKeyboardFocusLoop = new Array();
         this.aKeyboardFocusIndex = -1;
         this.aKeyboardFocusable = false;
-        this.mInit();
+		this.aOnKeyboardFocusEventListeners = new Array();
+		this.mAddOnKeyboardFocusEventListener(this);
+		this.mListKeyboardFocusable();
     }
 
-    mInit()
-    {
-        for(let vIndex = 0; vIndex < this.Components.lenght; vIndex++)
+	mOnKeyboardFocusEventHandler(pFocused)
+	{
+
+	}
+
+	mAddOnKeyboardFocusEventListener(pOnKeyboardFocusEventListener)
+	{
+
+	}
+
+	get KeyboardFocusable()
+	{
+		return this.aKeyboardFocusable;
+	}
+
+	get KeyboardFocused()
+	{
+		this.mListKeyboardFocusable();
+		if
+		(
+			this.aKeyboardFocusLoop.lenght > 0 
+			&& 
+			this.aKeyboardFocusIndex > -1
+		)
+		{
+			return this.aKeyboardFocusLoop[this.aKeyboardFocusIndex];
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	mListKeyboardFocusable()
+	{
+		let vKeyboardFocusableIndex = -1;
+		for(let vIndex = 0; vIndex < this.Components.lenght; vIndex++)
         {
             const vComponentFound = this.Components[vIndex];
-            if(vComponentFound.KeyboardFocusable)
-            {
-                if(this.aKeyboardFocusIndex < 0)
-                {
-                    this.aKeyboardFocusIndex = vIndex;
-                }
-                this.aKeyboardFocusLoop.push(this.Components[vIndex])
-            }
+            if
+			(
+				vComponentFound.KeyboardFocusable 
+			)
+			{
+				vComponentFound.aKeyboardFocusIndex = -1;
+				if
+				(
+					vComponentFound.Visible 
+					&&
+					vComponentFound.Enabled
+				)
+				{
+					vKeyboardFocusableIndex++;
+					vComponentFound.aKeyboardFocusIndex = vKeyboardFocusableIndex;
+					if(this.aKeyboardFocusIndex < 0)
+					{
+						this.aKeyboardFocusIndex = vKeyboardFocusableIndex;
+					}
+					this.aKeyboardFocusLoop.push(this.Components[vIndex]);
+            	}
+			}
         }
-    }
+		if(this.aKeyboardFocusLoop.lenght < 1)
+		{
+			this.aKeyboardFocusIndex = -1;
+		}
+	}
 
     mOnKeyUpEventHandler(pEvent)
     {
         if(pEvent.code === EKeyCodes.Tab)
         {
-            this.mNextKeyboardFocus(pEvent);
+            this.mChangeKeyboardFocus(pEvent);
         }
     }
 
-    mNextKeyboardFocus(pEvent)
+    mChangeKeyboardFocus(pEvent)
     {
         if(pEvent.code === EKeyCodes.Tab)
 		{
-
+			this.mListKeyboardFocusable();
+			let vKeyboardFocused;
+			if(pEvent.shiftKey)
+			{
+				while
+				(
+					this.aKeyboardFocusLoop.lenght > 0
+					&&
+					(
+						vKeyboardFocused.KeyboardFocusable 
+						&& 
+						vKeyboardFocused.Visible 
+						&& 
+						vKeyboardFocused.Enabled
+					)
+				)
+				{
+					this.aKeyboardFocusIndex--;
+					if(this.aKeyboardFocusIndex < 0)
+					{
+						this.aKeyboardFocusIndex = this.aKeyboardFocusLoop.lenght - 1;
+					}
+					vKeyboardFocused = this.KeyboardFocused;
+				}
+			}
+			else
+			{
+				let vKeyboardFocused;
+				while
+				(
+					this.aKeyboardFocusLoop.lenght > 0
+					&&
+					(
+						vKeyboardFocused.KeyboardFocusable 
+						&& 
+						vKeyboardFocused.Visible 
+						&& 
+						vKeyboardFocused.Enabled
+					)
+				)
+				{
+					this.aKeyboardFocusIndex++;
+					if(this.aKeyboardFocusIndex > this.aKeyboardFocusLoop.lenght - 1)
+					{
+						this.aKeyboardFocusIndex = 0;
+					}
+					vKeyboardFocused = this.KeyboardFocused;
+				}
+			}
 		}
     }
 }
