@@ -32,13 +32,12 @@ export class IntroScene extends Scene
         this.aStatus = IntroStatus.FadeIn;
         this.aAlpha = 0;
         this.aMouse = Mouse.Instance;
+        this.mAddOnAllEventListener(this);
         this.mAddOnAllEventListener(this.aMouse);
     }
 
     mOnLoadEventHandler()
     {
-        this.aMouse = null; 
-        document.body.style.cursor = "auto";
         this.aTimer = 0;
         this.aClicked = false;
         this.aStatus = IntroStatus.FadeIn;
@@ -119,7 +118,7 @@ export class IntroScene extends Scene
     
     mOnMouseMoveEventHandler(pEvent)
     {
-        //super.mOnMouseMoveEventHandler(pEvent);
+        super.mOnMouseMoveEventHandler(pEvent);
         this.aMouse = pEvent;
     }
 }

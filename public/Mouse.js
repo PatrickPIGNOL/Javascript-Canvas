@@ -10,13 +10,14 @@ class Mouse extends GraphicComponent
         {
             Mouse.aInstance = new Mouse();
         }
-        return Mouse.aInstance;
+        return Mouse.aInstance;	
     }
 
     constructor()
     {
         super();
         this.aMouse = null;
+        this.mAddOnAllEventListener(this);	
     }
 
     mOnDrawEventHandler(pCanvas, pGraphicContext)
